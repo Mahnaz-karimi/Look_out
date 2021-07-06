@@ -22,7 +22,7 @@ if os.path.exists('/etc/blog.json'):
         AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY')
         AWS_STORAGE_BUCKET_NAME = config.get('AWS_STORAGE_BUCKET_NAME')
-        DEBUG = config.get('DEBUG_VALUE')
+        DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
         ALLOWED_HOSTS = config.get('ALLOWED_HOSTS')
         DATABASES = {
             'default': {
