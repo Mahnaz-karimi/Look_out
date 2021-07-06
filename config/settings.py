@@ -26,7 +26,7 @@ SECRET_KEY = '90#^t3f^7wt)z80u!gl+hn=z#%4$mup1kuql$%d+sen^p*q@50'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'https://mind-vision.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'mind-vision.herokuapp.com']
 
 
 # Application definition
