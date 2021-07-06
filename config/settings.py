@@ -40,19 +40,6 @@ else:
     DEBUG = os.environ.get('DEBUG_VALUE')
     ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
     DATABASES = {}
-    if 'DYNO' in os.environ:  # Dette sker kun på Heroku, hvis man er på heroku så skal dette settes op
-        DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    else:
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': os.environ.get('DB_NAME'),
-                'USER': os.environ.get('DB_USER'),
-                'PASSWORD': os.environ.get('DB_PASSWORD'),
-                'HOST': os.environ.get('DB_HOST'),
-                'PORT': os.environ.get('DB_PORT'),
-            }
-        }
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
