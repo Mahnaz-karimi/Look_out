@@ -12,6 +12,46 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+if os.path.exists('/etc/blog.json'):
+    with open('/etc/blog.json') as config_file:
+        config = json.load(config_file)
+        SECRET_KEY = config.get('SECRET_KEY')
+        AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY')
+        AWS_STORAGE_BUCKET_NAME = config.get('AWS_STORAGE_BUCKET_NAME')
+        DEBUG = config.get('DEBUG_VALUE')
+        ALLOWED_HOSTS = config.get('ALLOWED_HOSTS')
+        DATABASES = {
+            'default': {
+                'ENGINE': config.get('DB_ENGINE'),
+                'NAME': config.get('DB_NAME'),
+                'USER': config.get('DB_USER'),
+                'PASSWORD': config.get('DB_PASSWORD'),
+                'HOST': config.get('DB_HOST'),
+                'PORT': config.get('DB_PORT'),
+            }
+        }
+else:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    DEBUG = os.environ.get('DEBUG_VALUE')
+    ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+    DATABASES = {}
+    if 'DYNO' in os.environ:  # Dette sker kun på Heroku, hvis man er på heroku så skal dette settes op
+        DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    else:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': os.environ.get('DB_NAME'),
+                'USER': os.environ.get('DB_USER'),
+                'PASSWORD': os.environ.get('DB_PASSWORD'),
+                'HOST': os.environ.get('DB_HOST'),
+                'PORT': os.environ.get('DB_PORT'),
+            }
+        }
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +61,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '90#^t3f^7wt)z80u!gl+hn=z#%4$mup1kuql$%d+sen^p*q@50'
+# SECRET_KEY = '90#^t3f^7wt)z80u!gl+hn=z#%4$mup1kuql$%d+sen^p*q@50'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
