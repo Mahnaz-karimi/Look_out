@@ -26,7 +26,7 @@ SECRET_KEY = '90#^t3f^7wt)z80u!gl+hn=z#%4$mup1kuql$%d+sen^p*q@50'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://mind-vision.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'https://mind-vision.herokuapp.com/']
 
 
 # Application definition
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
