@@ -1,15 +1,12 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <p>Hello </p>
-    {% for caseinfo in posts %}
+    {% for post in posts %}
        <blog class="media content-section">
             <div class="media-body">
-                  <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-                </div>
-                <p>{ { post.title }} </p>
-                <p class="article-content">{{ post.content }}</p>
-
-            </div>
+                <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                <p>Titel: {{ post.title }} </p>
+                <p class="article-content">Emne: {{ post.content }}</p>
+           </div>
        </blog>
     {% endfor %}
 {% endblock content %}
