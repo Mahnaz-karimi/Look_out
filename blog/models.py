@@ -11,4 +11,4 @@ class Post(models.Model):
     # on_delete gøre at hvis en bruger bliver slettet så vil posten bliver også slettet. den gøres med Cascade med store bogstaver
 
     def __str__(self):
-        return self.title
+        return self.author
