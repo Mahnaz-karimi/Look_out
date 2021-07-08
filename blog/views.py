@@ -4,6 +4,7 @@ from django.views.generic import (
 )
 from django.contrib.auth import views as auth_views
 
+
 class PostListView(ListView):
     model = Post
     template_name = 'blog/blog.html'  # <app>/<model>_<viewtype>.html  PostListView.as_view() med den mens <app> / <model>_<vietype> html- app er ligsom vores repport app. model er database og vieetype er list.
