@@ -4,9 +4,8 @@
        <blog class="media content-section">
             <div class="media-body">
                 <small class="text-muted">
-                    <p> From {{ post.author.username }} den  {{ post.date_posted|date:"F d, Y" }} </p>
+                    <p> From {{ post.author.username }}     den  {{ post.date_posted|date:"F d, Y" }} </p>
                 </small>
-
                 <p class="article-content"> {{ post.content }}</p>
            </div>
        </blog>

@@ -8,6 +8,7 @@ LoginView
 )
 from . import views
 
+app_name = 'blog'
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
     path('login/', LoginView.as_view(template_name='blog/login.html'), name='login'),

@@ -169,3 +169,10 @@ STATIC_URL = '/static/'
 django_heroku.settings(locals())
 
 LOGIN_REDIRECT_URL = '/blog/'
+
+FEATURES = {}
+if os.path.exists('/etc/features.json'):
+    with open('/etc/features.json') as feature_file:
+        FEATURES = json.load(feature_file)
+elif 'FEATURES' in os.environ:
+    FEATURES = json.loads(os.environ.get('FEATURES'))
