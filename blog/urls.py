@@ -1,12 +1,10 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.decorators import login_required
 
 from blog.views import (
     PostListView,
-LoginView
+    LoginView,
 )
-from . import views
 
 app_name = 'blog'
 urlpatterns = [
