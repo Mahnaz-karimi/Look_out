@@ -1,13 +1,15 @@
 {% extends "blog/base.html" %}
 {% block content %}
     {% for post in posts %}
-       <blog class="media content-section">
-            <div class="media-body">
-                <small class="text-muted">
-                    <p> From {{ post.author.username }}     den  {{ post.date_posted|date:"F d, Y" }} </p>
-                </small>
-                <p class="article-content"> {{ post.content }}</p>
-           </div>
-       </blog>
+        <post class="media content-section">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2" href="{% url 'blog:user-posts' post.author.username %}">
+                      From {{ post.author.username }} den </a>
+                  <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                </div>
+                <h2><a class="article-title"  href="{% url 'blog:post-detail' post.id %}" >{{ post.content }}</a></h2>
+              </div>
+        </post>
     {% endfor %}
 {% endblock content %}

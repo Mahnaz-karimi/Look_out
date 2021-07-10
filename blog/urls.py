@@ -4,6 +4,9 @@ from django.contrib.auth import views as auth_views
 from blog.views import (
     PostListView,
     LoginView,
+    PostDetailView,
+    UserPostListView,
+
 )
 
 app_name = 'blog'
@@ -12,4 +15,6 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='blog/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='blog/logout.html'),
          name='logout'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
 ]
