@@ -5,10 +5,10 @@
               <div class="media-body">
                 <div class="article-metadata">
                   <a class="mr-2" href="{% url 'blog:user-posts' post.author.username %}">
-                      From {{ post.author.username }} den </a>
+                      {{ post.author.username }} </a>
                   <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                 </div>
-                <h2><a class="article-title"  href="{% url 'blog:post-detail' post.id %}" >{{ post.content }}</a></h2>
+                <h2><a class="article-content"  href="{% url 'blog:post-detail' post.id %}" >{{ post.content }}</a></h2>
               </div>
         </post>
     {% endfor %}

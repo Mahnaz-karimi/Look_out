@@ -5,7 +5,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+  color: #ffffff;
 }
 
 ul {
@@ -13,7 +13,7 @@ ul {
 }
 
 .bg-steel {
-  background-color: #777777;
+  background-color: #ffffff;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -21,7 +21,7 @@ ul {
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #cbd5db;
+  color: #ffffff;
 }
 
 .site-header .navbar-nav .nav-link.active {
@@ -37,11 +37,11 @@ ul {
 }
 
 .article-title {
-  color: #153380;
+  color: #ffffff;
 }
 
 a.article-title:hover {
-  color: #153380;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -62,7 +62,7 @@ a.article-title:hover {
 }
 
 .article-metadata a:hover {
-  color: #333;
+  color: #f5dd5d;
   text-decoration: none;
 }
 
@@ -85,7 +85,7 @@ a.article-title:hover {
 
 .adminpanel-span {
   font-size: 36px;
-  border-bottom: 1px solid #777777;
+  border-bottom: 1px solid #ffffff;
   padding-bottom: 100px;
   position: relative;
 }
