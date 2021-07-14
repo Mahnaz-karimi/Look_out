@@ -8,7 +8,9 @@
                       {{ post.author.username }} </a>
                   <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                 </div>
-                <h2><a class="article-content"  href="{% url 'blog:post-detail' post.id %}" >{{ post.content }}</a></h2>
+                  <p class="article-content">{{ post.content }}</p>
+                <h10><a class="text-muted"  href="{% url 'blog:post-detail' post.id %}" > Se mere </a></h10>
+
               </div>
         </post>
     {% endfor %}

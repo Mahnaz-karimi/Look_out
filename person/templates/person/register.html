@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %} <!-- så får vi lov til at bruge cripsy filter -->
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}  <!-- sikre hejmmesiden -->
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+               <!--   vil hente formen som a paragraf tekst men efter at bruge cripsy, har vi ikke bruge for .as_ p form.as_p-->
+                {{ form|crispy}} <!-- bruge vertical bar charcter for at bruge a filter. som vi har brugt crispy-->
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

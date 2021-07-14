@@ -37,16 +37,12 @@ ul {
 }
 
 .article-title {
-  color: #153380;
+  color: #ffffff;
 }
 
 a.article-title:hover {
-  color: #153380;
+  color: #ffffff;
   text-decoration: none;
-}
-
-.article-content {
-  white-space: pre-line;
 }
 
 .article-img {
