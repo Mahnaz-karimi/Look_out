@@ -21,5 +21,6 @@ class UserUpdateForm(forms.ModelForm): # den form dukkes up ind i users profilen
 
 class ProfileUpdateForm(forms.ModelForm): # den method vil opdatere image
     class Meta:
-        model = Profile # den model vi bruger her er  profile model. så derfor skriver vi under 2 methode og derefter kalder vi dem under views.py for at de kan opdatere userprofile
+        model = Profile  # den model vi bruger her er  profile model. så derfor skriver vi under 2 methode og derefter
+        # kalder vi dem under views.py for at de kan opdatere userprofile
         fields = ['image']
