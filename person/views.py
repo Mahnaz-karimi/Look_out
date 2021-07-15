@@ -32,7 +32,7 @@ def profile(request):
 
     else:
         u_form = UserUpdateForm(instance=request.user)  # instance gøre det at aktuelt navn og email vil vises
-        p_form = ProfileUpdateForm(instance=request.user.profile) # instance gøre det at aktuelt image navn vises
+        p_form = ProfileUpdateForm(instance=request.user.profile)  # instance gøre det at aktuelt image navn vises
 
     context = {
         'u_form': u_form,
