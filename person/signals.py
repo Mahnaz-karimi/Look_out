@@ -1,15 +1,16 @@
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User  # hvsm som sender signal
-from django.dispatch import receiver# person som får signal
-from .models import Profile
+from django.contrib.auth.models import User  # hvem som sender signal
+from django.dispatch import receiver
+from person.models import Profile
 
 
-@receiver(post_save, sender=User) # som argument for en der får signal og en anden som sender signal og det er receiver som creat en profile
+@receiver(post_save, sender=User)  # argument er en signal for gemme og en user.
 def create_profile(sender, instance, created, **kwargs):
-    if created:
+    if created:  # Hver gang created-metode for at oprette en user er blevet brugt,
+        # så vil der laves en profile med det samme
         Profile.objects.create(user=instance)
 
 
-@receiver(post_save, sender=User) # efter at skab en profil så vil gemmes med den methode
-def save_profile(sender, instance, **kwargs): # **kwargs undtager hver ekstra tegn til funktion
-    instance.profile.save()# instance er user
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):  # ** undtager hver ekstra tegn som sendes fra keyword
+    instance.profile.save()   # Profilen bliver gemt

@@ -3,7 +3,7 @@
 {% block content %}
     <div class="content-section">
       <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}"> <!-- den user er fra selve django som repræsentere den brugeren som har logget ind-->
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}"> <!-- profile billede-->
         <div class="media-body">
           <h2 class="account-heading">{{ user.username }}</h2>
           <p class="text-secondary">{{ user.email }}</p>
