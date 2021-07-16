@@ -9,6 +9,18 @@
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>
-      <!-- FORM HERE -->
+        <form method="POST" enctype="multipart/form-data">  <!-- Denne "enctype" gøre at billede i backgrand vil gemmes -->
+            {% csrf_token %}  <!-- sikre hejmmesiden -->
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Profile info </legend>
+               <!--   vil hente formen som a paragraf tekst men efter at bruge cripsy, har vi ikke bruge for .as_ p form.as_p-->
+                {{ u_form|crispy}} <!-- bruge vertical bar charcter for at bruge a filter crispy forms tags -->
+                {{ p_form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
+
     </div>
 {% endblock content %}

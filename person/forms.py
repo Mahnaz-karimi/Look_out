@@ -5,22 +5,24 @@ from person.models import Profile
 
 
 class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
 
     class Meta:  # meta classe giv os en nested namespace for configurations in i en plads
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
 
-class UserUpdateForm(forms.ModelForm): # den form dukkes up ind i users profilens side og vil opdates username og email
+class UserUpdateForm(forms.ModelForm):  # Opdateres user
     email = forms.EmailField()
 
     class Meta:
-        model = User  # det model vil vi arbjede med vil vil kaldes
+        model = User  # vil user bliver opdatet
         fields = ['username', 'email']
 
 
-class ProfileUpdateForm(forms.ModelForm): # den method vil opdatere image
+class ProfileUpdateForm(forms.ModelForm):  # Opdatere profile
+
     class Meta:
-        model = Profile  # den model vi bruger her er  profile model. så derfor skriver vi under 2 methode og derefter
-        # kalder vi dem under views.py for at de kan opdatere userprofile
-        fields = ['image']
+        model = Profile  # opdatere user-profile
+
+        fields = ['image']  # opdateres kun billede for profilen. User vil opdates i ovenstående methode
