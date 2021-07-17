@@ -5,13 +5,14 @@
             <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> <!-- den vil vise billed af den user
                     som har oploadet under hver post i home page.-->
               <div class="media-body">
+                  <div class="row justify-content-md-center pt-5"></div>
                 <div class="article-metadata">
 
                   <a class="mr-2" href="{% url 'blog:user-posts' post.author.username %}">
                       {{ post.author.username }} </a>
                   <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                 </div>
-                  <p class="article-content">{{ post.content }}</p>
+                 <div class="mr-2" ><p class="article-content">{{ post.content|safe }}</p></div>
                 <h10><a class="text-muted"  href="{% url 'blog:post-detail' post.id %}" > Se mere </a></h10>
 
               </div>
