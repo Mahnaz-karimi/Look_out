@@ -22,7 +22,7 @@ if os.path.exists('/etc/blog.json'):
         AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY')
         AWS_STORAGE_BUCKET_NAME = config.get('AWS_STORAGE_BUCKET_NAME')
-        DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+        DEBUG = (config.get('DEBUG_VALUE') == 'True')
         ALLOWED_HOSTS = config.get('ALLOWED_HOSTS')
         DATABASES = {
             'default': {
@@ -39,7 +39,7 @@ else:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-    DEBUG = False
+    DEBUG = (os.environ.get('DEBUG_VALUE') == 'False')
     ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
     DATABASES = {}
     if 'DYNO' in os.environ:  # Dette sker kun på Heroku, hvis man er på heroku så skal dette settes op
@@ -65,7 +65,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-ALLOWED_HOSTS = ['127.0.0.1', '*']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -164,6 +164,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'pictures')
 MEDIA_URL = '/pictures/'
 django_heroku.settings(locals())
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/blog/'
 

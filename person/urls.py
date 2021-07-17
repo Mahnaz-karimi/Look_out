@@ -1,6 +1,5 @@
-from person.views import register
+from person.views import register, profile
 from django.urls import path
-from person.views import profile
 
 
 app_name = 'person'

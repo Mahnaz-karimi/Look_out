@@ -5,7 +5,6 @@ from person.models import Profile
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
 
     class Meta:  # meta classe giv os en nested namespace for configurations in i en plads
         model = User

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from person.forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
-def register(request):
+def register(request):  # register en bruger
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -18,7 +18,7 @@ def register(request):
 
 
 @login_required  # krævs at brugeren har logget ind for at vise profile side.
-def profile(request):
+def profile(request):  # se og opdatere profile
     if request.method == 'POST':  # Når der nogle data er blevet send for at gemmes
         u_form = UserUpdateForm(request.POST, instance=request.user)  # For at ændre users data som er navn og email
         # og som default vil stå navn for user ind i feltet
