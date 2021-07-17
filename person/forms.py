@@ -5,6 +5,7 @@ from person.models import Profile
 
 
 class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
 
     class Meta:  # meta classe giv os en nested namespace for configurations in i en plads
         model = User
@@ -20,6 +21,7 @@ class UserUpdateForm(forms.ModelForm):  # Opdateres user
 
 
 class ProfileUpdateForm(forms.ModelForm):  # Opdatere profile
+    image = forms.ImageField()
 
     class Meta:
         model = Profile  # opdatere user-profile
