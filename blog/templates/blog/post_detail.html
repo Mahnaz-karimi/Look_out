@@ -6,6 +6,7 @@
               <a class="mr-2" href="{% url 'blog:user-posts' object.author.username %}">{{ object.author }}</a> <!--i detail page bruger bi object og ikke post-->
               <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
             </div>
+              <div class="mr-3" ><p class="article-metadata">{{ post.title }}</p></div>
             <div class="mr-2" ><p class="article-content">{{ post.content|safe }}</p></div>
           </div>
         </article>
