@@ -2,7 +2,6 @@ from blog.models import Post, Comment
 from django.contrib.auth.models import User
 from django.views.generic import (
     ListView,
-    DetailView,
 )
 from django.contrib.auth import views as auth_views
 from django.shortcuts import get_object_or_404
