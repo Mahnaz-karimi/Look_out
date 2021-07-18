@@ -1,4 +1,4 @@
-from blog.models import Post
+from blog.models import Post, Comment
 from django.contrib.auth.models import User
 from django.views.generic import (
     ListView,
@@ -22,8 +22,15 @@ class LoginView(auth_views.LoginView):
         return context
 
 
-class PostDetailView(DetailView):
-    model = Post
+class PostCommentsView(ListView):
+    model = Comment
+    template_name = 'blog/post_comments.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PostCommentsView, self).get_context_data(**kwargs)
+        post = get_object_or_404(Post, id=self.kwargs['id'])
+        context = {'comments': Comment.objects.filter(post=post.id)}
+        return context
 
 
 class UserPostListView(ListView):

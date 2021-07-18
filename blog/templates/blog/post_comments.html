@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+    {% for comment in comments %}
+       <comment class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <p><small class="media content-section">{{ comment.date_posted|date:"F d, Y" }}</small></p>
+                </div>
+                <p> {{comment.author}}</p>
+                <p> {{comment.content}}</p>
+            </div>
+       </comment>
+    {% endfor %}
+<a href="{{request.META.HTTP_REFERER}}">Go back</a>
+{% endblock content %}
