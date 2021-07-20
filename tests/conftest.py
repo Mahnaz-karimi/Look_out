@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth import get_user_model
-from blog.models import Post
+from blog.models import Post, Comment
 from django.conf import settings
 
 
@@ -32,8 +32,18 @@ def create_user_for_login(user_data_for_login):
 
 @pytest.fixture
 def post_data():
-    content = Post.objects.create(name='Test')
+    content = Post.objects.create(name='post_content_Test')
     user_model = get_user_model()
     author = user_model.objects.create_user(**user_data_for_register)
     post = Post.objects.create(content=content, author=author)
     return post
+
+
+@pytest.fixture
+def comment_data():
+    content = Post.objects.create(name='post_content_Test')
+    user_model = get_user_model()
+    author = user_model.objects.create_user(**user_data_for_register)
+    post = Post.objects.create(content=content, author=author)
+    comment = Comment.objects.create(content='comment_content_Test', author=author, post=post)
+    return post, comment

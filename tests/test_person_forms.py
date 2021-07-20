@@ -31,7 +31,6 @@ class TestForms(TestCase):
             'password2': 'madrese122'
 
         })
-        print("ddddddddddddddddddddddd", form)
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 1)
 
