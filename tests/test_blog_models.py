@@ -44,4 +44,6 @@ class BlogModelTest(TestCase):
     def test_comment_content(self):
         self.assertEqual(str(self.comment.content), "comment_content_Test")
 
-
+    # Test timezone er lige med postens tid
+    def test_post_created_date(self):
+        self.assertEqual(str(self.post.date_posted.strftime('%Y-%m-%d %H:%M:%S.%f')[:-7]), str(timezone.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-7]))
