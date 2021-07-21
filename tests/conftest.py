@@ -2,7 +2,7 @@ import pytest
 from django.contrib.auth import get_user_model
 from blog.models import Post, Comment
 from django.conf import settings
-
+from django.contrib.auth.models import User
 
 # Test med toggle-feature enabled
 settings.FEATURES['REVISIT_CASE'] = True
@@ -11,7 +11,7 @@ settings.FEATURES['REVISIT_CASE'] = True
 @pytest.fixture
 def user_data_for_register():
     return {
-        'username': 'my_username',
+        'username': '12username',
         'password1': 'my_password123',
         'password2': 'my_password123',
         'email': 'username@yahoo.com'
@@ -32,18 +32,17 @@ def create_user_for_login(user_data_for_login):
 
 @pytest.fixture
 def post_data():
-    content = Post.objects.create(name='post_content_Test')
-    user_model = get_user_model()
-    author = user_model.objects.create_user(**user_data_for_register)
-    post = Post.objects.create(content=content, author=author)
+    title = "title1"
+    content = 'post_content_Test'
+    author = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
+    post = Post.objects.create(title=title, content=content, author=author)
     return post
 
 
 @pytest.fixture
 def comment_data():
-    content = Post.objects.create(name='post_content_Test')
-    user_model = get_user_model()
-    author = user_model.objects.create_user(**user_data_for_register)
-    post = Post.objects.create(content=content, author=author)
+    content = 'post_content_Test'
+    author = User.objects.create(username='jacob2', email='jacob@…', password='top_secret')
+    post = Post.objects.create(title="title2", content=content, author=author)
     comment = Comment.objects.create(content='comment_content_Test', author=author, post=post)
     return post, comment

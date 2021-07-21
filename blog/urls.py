@@ -16,5 +16,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='blog/logout.html'),
          name='logout'),
     path('post/<int:id>/comments/', PostCommentsView.as_view(), name='post-comments'),
-    path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
+    path('user/posts/<str:username>', UserPostListView.as_view(), name='user-posts'),
 ]

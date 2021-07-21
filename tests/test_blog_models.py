@@ -55,6 +55,6 @@ class BlogModelTest(TestCase):
     def test_comment_instance_str(self):
         self.assertIsInstance(self.comment, Comment)
 
-    # Test that post has content of type str
+    # Test that comment has content of type str
     def test_comment_content_type(self):
         self.assertIsInstance(self.comment.content, str)
