@@ -6,7 +6,6 @@ from django.test import TestCase
 class PersonModelTest(TestCase):
 
     def setUp(self):
-
         self.user = User.objects.create_user(username='1jacob11', email='jacob@…', password='top_secret')
         self.profile = Profile.objects.get(user=self.user)
 
