@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Post(models.Model):
@@ -12,6 +13,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.author.username
+
+    def get_absolute_url(self):
+        return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern kalled pk
 
 
 class Comment(models.Model):

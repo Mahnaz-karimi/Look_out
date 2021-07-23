@@ -21,7 +21,7 @@ def test_logged_views(client, url, expected):
 def test_person_register(client, user_data_for_login, create_user_for_login, user_data_for_register):
     user_model = get_user_model()
     assert user_model.objects.count() == 1  # Når vi kalder create_user_model in i modelen opreetter vi en user
-    login_url = urls.reverse('blog:login')
+    login_url = urls.reverse('person:login')
     resp = client.post(login_url, data=user_data_for_login)
     assert resp.status_code == 302
     assert resp.url == urls.reverse('blog:blog-home')  # Når man logger ind så bliver man redirected til "/case/"
@@ -36,7 +36,7 @@ def test_person_register(client, user_data_for_login, create_user_for_login, use
 def test_person_profile(client, user_data_for_login, create_user_for_login, user_data_for_register):
     user_model = get_user_model()
     assert user_model.objects.count() == 1  # Når vi kalder create_user_model in i modelen opreetter vi en user
-    login_url = urls.reverse('blog:login')
+    login_url = urls.reverse('person:login')
     resp = client.post(login_url, data=user_data_for_login)
     assert resp.status_code == 302
     assert resp.url == urls.reverse('blog:blog-home')  # Når man logger ind så bliver man redirected til "/case/"

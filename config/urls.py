@@ -24,7 +24,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('person/', include('person.urls')),
     path('', RedirectView.as_view(url='/blog/')),
-    path('blog/login/', RedirectView.as_view(url='/blog/')),
+    path('person/login/', RedirectView.as_view(url='/blog/')),
     path('admin/login/', RedirectView.as_view(url='/blog/')),
 ]
 

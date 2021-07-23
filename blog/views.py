@@ -1,24 +1,25 @@
 from blog.models import Post, Comment
 from django.contrib.auth.models import User
 from django.views.generic import (
-    ListView,
+    ListView, CreateView
 )
-from django.contrib.auth import views as auth_views
 from django.shortcuts import get_object_or_404
 
 
 class PostListView(ListView):
     model = Post
-    template_name = 'blog/blog.html'  # <app>/<model>_<viewtype>.html  PostListView.as_view() med den mens <app> / <model>_<vietype> html- app er ligsom vores repport app. model er database og vieetype er list.
+    template_name = 'blog/blog.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'posts'
     ordering = ['-date_posted']  # med - vil nyeste post vil stå først
 
 
-class LoginView(auth_views.LoginView):
+class PostCreateView(CreateView):
+    model = Post
+    fields = ['title', 'content']
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+    def form_valid(self, form):
+        form.instance.author = self.request.user  # tjekker at den er aktuelle user
+        return super().form_valid(form)
 
 
 class PostCommentsView(ListView):
