@@ -2,12 +2,10 @@
 {% block content %}
     {% for post in posts %}
         <post class="media content-section">
-            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> <!-- den vil vise billed af den user
-                    som har oploadet under hver post i home page.-->
+            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> <!-- den vil vise billed af den user -->
               <div class="media-body">
                   <div class="row justify-content-md-center pt-5"></div>
                 <div class="article-metadata">
-
                   <a class="mr-2" href="{% url 'blog:user-posts' post.author.username %}">
                       {{ post.author.username }} </a>
                   <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
@@ -15,12 +13,12 @@
                 </div>
                  <div class="mr-2" ><p class="article-content">{{ post.content|safe }}</p></div>
                  <div>
-                     <a class="btn btn-outline-info btn-sm mt-1 mb-1" href="{% url 'blog:post-update' post.id %}">Ændrer post</a>
-                     <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'blog:post-delete' post.id %}">Delete post </a>
+                     {% if post.author == user %} <!-- man kan access user hver html side -->
+                     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:post-update' post.id %}">Ændrer post</a>
+                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'blog:post-delete' post.id %}">Delete post </a>
+                     {% endif %}
                      <h10><a class="text-muted"  href="{% url 'blog:post-comments' post.id %}" > Se kommenter </a></h10>
-
                  </div>
-
               </div>
         </post>
     {% endfor %}
