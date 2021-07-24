@@ -12,6 +12,7 @@ class LoginView(auth_views.LoginView):
         return context
 
 
+@login_required  # kræves at brugeren har logget ind for at vise profile side.
 def register(request):  # register en bruger
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -25,7 +26,7 @@ def register(request):  # register en bruger
     return render(request, 'person/register.html', {'form': form})
 
 
-@login_required  # krævs at brugeren har logget ind for at vise profile side.
+@login_required  # kræves at brugeren har logget ind for at vise profile side.
 def profile(request):  # se og opdatere profile
     if request.method == 'POST':  # Når der nogle data er blevet send for at gemmes
         u_form = UserUpdateForm(request.POST, instance=request.user)  # For at ændre users data som er navn og email

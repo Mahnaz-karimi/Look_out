@@ -5,7 +5,7 @@ import pytest
 
 # Data til data-drevet test
 url_data = [
-    ('person:register', 200),
+    ('person:register', 302),
     ('person:profile', 302),
 ]
 

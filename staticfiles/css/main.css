@@ -13,7 +13,7 @@ ul {
 }
 
 .bg-steel {
-  background-color: #153380;
+  background-color: #205067;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -37,11 +37,11 @@ ul {
 }
 
 .article-title {
-  color: #153380;
+  color: #205067;
 }
 
 a.article-title:hover {
-  color: #153380;
+  color: #205067;
   text-decoration: none;
 }
 

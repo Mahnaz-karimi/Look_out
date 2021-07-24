@@ -23,16 +23,18 @@
               <div class="collapse navbar-collapse" id="navbarToggle">
                   <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link" href="/">Om mig selv </a>
-                    <a class="nav-item nav-link" href="/">Kontakt Information</a>
+                      {% if user.is_authenticated %}
+                      <a class="nav-item nav-link" href="/blog/post/new/">Opret post</a>
+                      {% endif %}
                   </div>
                   <div class="navbar-nav">
                       {% if user.is_authenticated %}
-                        <a class="nav-item nav-link" href="/person/register">Registrer</a>
-                        <a class="topnav-right nav-link" href="/">Alle bekendte</a>
-                        <a class="nav-item nav-link" href="/person/logout">Logout</a>
+                          <a class="nav-item nav-link" href="/person/register">Registrer</a>
+                          <a class="topnav-right nav-link" href="/">Alle bekendte</a>
+                          <a class="nav-item nav-link" href="/person/logout">Logout</a>
                           <a class="nav-item nav-link" href="/person/profile">Profile</a>
                       {% else %}
-                        <a class="nav-item nav-link" href="/person/login">Login</a>
+                          <a class="nav-item nav-link" href="/person/login">Login</a>
                       {% endif %}
                   </div>
 
