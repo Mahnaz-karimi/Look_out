@@ -18,7 +18,7 @@ def register(request):  # register en bruger
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
+            username = form.cleaned_data.get('username')  #
             messages.success(request, f'Account created for {username} has been createt!')  # f = format string
             return redirect('blog:blog-home')  # Hvis formen er valid så vil redirect til den url pattern for blogs
     else:
