@@ -2,7 +2,6 @@ from person.views import register, profile
 from django.urls import path
 from person.views import LoginView
 from django.contrib.auth import views as auth_views
-from django.core.paginator import Paginator
 
 app_name = 'person'
 urlpatterns = [
