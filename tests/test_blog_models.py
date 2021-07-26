@@ -31,8 +31,8 @@ class BlogModelTest(TestCase):
 
     # Test postens tid er lige nutid i det nedstående format
     def test_post_created_date(self):
-        self.assertEqual(str(self.post.date_posted.strftime('%Y-%m-%d %H:%M:%S.%f')[:-7]),
-                         str(timezone.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-7]))
+        self.assertEqual(str(self.post.date_posted.strftime('%Y-%m-%d %H:%M')[:-7]),
+                         str(timezone.now().strftime('%Y-%m-%d %H:%M')[:-7]))
 
     # Test that post author is instance of User
     def test_post_has_author(self):
