@@ -169,6 +169,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog:blog-home'
 LOGIN_URL = 'person:login'
 
+PAGINATION_COUNT = 1
+
 
 FEATURES = {}
 if os.path.exists('/etc/features.json'):

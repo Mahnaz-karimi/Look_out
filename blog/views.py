@@ -5,6 +5,7 @@ from django.views.generic import (
 )
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # mix in sikre os at user er logget ind
+import config.settings
 
 
 class PostListView(ListView):
@@ -12,7 +13,7 @@ class PostListView(ListView):
     template_name = 'blog/blog.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'posts'
     ordering = ['-date_posted']  # med - vil nyeste post vil stå først
-    paginate_by = 5
+    paginate_by = config.settings.PAGINATION_COUNT
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -65,7 +66,7 @@ class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_posts.html'
     context_object_name = 'posts'
-    paginate_by = 5
+    paginate_by = config.settings.PAGINATION_COUNT
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
