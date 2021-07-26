@@ -12,6 +12,7 @@ class PostListView(ListView):
     template_name = 'blog/blog.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'posts'
     ordering = ['-date_posted']  # med - vil nyeste post vil stå først
+    paginate_by = 1
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -64,6 +65,7 @@ class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_posts.html'
     context_object_name = 'posts'
+    paginate_by = 1
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))

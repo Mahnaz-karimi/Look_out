@@ -166,7 +166,9 @@ MEDIA_URL = '/pictures/'
 django_heroku.settings(locals())
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = '/blog/'
+LOGIN_REDIRECT_URL = 'blog:blog-home'
+LOGIN_URL = 'person:login'
+
 
 FEATURES = {}
 if os.path.exists('/etc/features.json'):
