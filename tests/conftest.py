@@ -33,8 +33,8 @@ def create_user_for_login(user_data_for_login):
 @pytest.fixture
 def post_data():
     title = "title1"
-    content = 'post_content_Test'
-    author = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
+    content = 'post_content_Test1'
+    author = User.objects.latest('pk')
     post = Post.objects.create(title=title, content=content, author=author)
     return post
 
@@ -42,7 +42,7 @@ def post_data():
 @pytest.fixture
 def comment_data():
     content = 'post_content_Test'
-    author = User.objects.create(username='jacob2', email='jacob@…', password='top_secret')
+    author = User.objects.create(username='mahnaz2', email='test2@test.dk', password='password')
     post = Post.objects.create(title="title2", content=content, author=author)
-    comment = Comment.objects.create(content='comment_content_Test', author=author, post=post)
+    comment = Comment.objects.create(content='comment_content_Test2', author=author, post=post)
     return post, comment
