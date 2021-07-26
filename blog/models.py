@@ -12,7 +12,7 @@ class Post(models.Model):
     #  on_delete gøre at hvis en bruger bliver slettet så vil posten bliver også slettet. den gøres med Cascade med store bogstaver
 
     def __str__(self):
-        return self.author.username
+        return self.title
 
     def get_absolute_url(self):
         return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern kalled pk
