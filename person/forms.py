@@ -25,5 +25,4 @@ class ProfileUpdateForm(forms.ModelForm):  # Opdatere profile
 
     class Meta:
         model = Profile  # opdatere user-profile
-
         fields = ['image']  # opdateres kun billede for profilen. User vil opdates i ovenstående methode

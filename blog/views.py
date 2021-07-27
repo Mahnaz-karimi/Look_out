@@ -51,6 +51,24 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
+class CommentNewPostCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    fields = ['content']
+    success_url = '/blog/'
+
+    def form_valid(self, form):  # tilføje logind-brugeren som author in i post
+        post = get_object_or_404(Post, id=self.kwargs['id'])
+        form.instance.post = post
+        form.instance.author = self.request.user  # tjekker at den er aktuelle user
+        return super(CommentNewPostCreateView, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = get_object_or_404(Post, id=self.kwargs['id'])
+        context['post'] = Post.objects.get(id=post.id)
+        return context
+
+
 class PostCommentsView(ListView):
     model = Comment
     template_name = 'blog/post_comments.html'

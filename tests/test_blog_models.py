@@ -25,6 +25,9 @@ class BlogModelTest(TestCase):
     def test_post_title_type(self):
         self.assertIsInstance(self.post.title, str)
 
+    def test_comment_has_content(self):
+        self.assertEqual(str(self.comment.content), "comment_content_Test")
+
     # Test that post has content of type str
     def test_post_content_type(self):
         self.assertIsInstance(self.post.content, str)
@@ -39,7 +42,7 @@ class BlogModelTest(TestCase):
         self.assertIsInstance(self.post.author, User)
 
     # Test that post has author
-    def test_post_has_author(self):
+    def test_post_author_is_same_author(self):
         self.assertEqual(self.post.author, self.author)
 
     # Test that comment is the same post
@@ -49,12 +52,21 @@ class BlogModelTest(TestCase):
     def test_comment_instance(self):
         self.assertTrue(isinstance(self.comment, Comment))
 
-    def test_comment_has_content(self):
-        self.assertEqual(str(self.comment.content), "comment_content_Test")
-
-    def test_comment_instance_str(self):
+    def test_comment_instance_(self):
         self.assertIsInstance(self.comment, Comment)
 
     # Test that comment has content of type str
     def test_comment_content_type(self):
         self.assertIsInstance(self.comment.content, str)
+
+    # Test that comment author is instance of User
+    def test_comment_has_author(self):
+        self.assertIsInstance(self.comment.author, User)
+
+    # Test that comment post is instance of post
+    def test_comment_has_post(self):
+        self.assertIsInstance(self.comment.post, Post)
+
+    # Test that comment has post
+    def test_post_comment_is_post(self):
+        self.assertEqual(self.comment.post, self.post)

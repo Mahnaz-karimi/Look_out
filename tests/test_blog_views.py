@@ -25,6 +25,16 @@ def test_user_login(client, user_data_for_login, create_user_for_login):
 
 
 @pytest.mark.django_db
+def test_Post_Delete_View(client, user_data_for_login, create_user_for_login, post_data):
+    test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
+    post = Post.objects.latest('pk')
+    user_url = urls.reverse('blog:post-delete', kwargs={'pk': post.id})
+    resp = client.post(user_url)
+    assert resp.status_code == 302
+    assert resp.url == urls.reverse('blog:blog-home')
+
+
+@pytest.mark.django_db
 def test_PostCreateView(client, user_data_for_login, create_user_for_login):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     user_url = urls.reverse('blog:post-new')
@@ -45,6 +55,18 @@ def test_PostUpdateView(client, user_data_for_login, create_user_for_login, post
     resp = client.post(user_url, {
         'title': 'title',
         'content': 'content'
+    })
+    assert resp.status_code == 302  # Redirect to home view efter at update en post
+    assert resp.url == urls.reverse('blog:blog-home')  # Efter update a Post, bliver man redirected til "/blog/"
+
+
+@pytest.mark.django_db
+def test_CommentNewPostCreateView(client, user_data_for_login, create_user_for_login, post_data):
+    test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
+    post = Post.objects.latest('pk')
+    user_url = urls.reverse('blog:comment-new', kwargs={'id': post.id})
+    resp = client.post(user_url, {
+        'content': 'content1'
     })
     assert resp.status_code == 302  # Redirect to home view efter at update en post
     assert resp.url == urls.reverse('blog:blog-home')  # Efter update a Post, bliver man redirected til "/blog/"

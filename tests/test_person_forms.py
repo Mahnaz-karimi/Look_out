@@ -1,4 +1,4 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 from person.forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
@@ -81,7 +81,7 @@ class TestForms(TestCase):
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 1)
 
-    def test_UserUpdateForm_form_not_valid_mail(self):
+    def test_UserUpdateForm_form_not_valid_username_mail(self):
         form = UserUpdateForm(data={
             'username': '',
             'email': 'madrese122'
@@ -90,17 +90,9 @@ class TestForms(TestCase):
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 2)
 
-    def test_ProfileUpdateForm(self):
-        form = ProfileUpdateForm(data={
-            'image': 'default.jpg',
-
-        })
-        self.assertTrue(form.is_valid())
-
-    def test_ProfileUpdateForm(self):
+    def test_ProfileUpdateForm_wrong_picture(self):
         form = ProfileUpdateForm(data={
             'image': 'default',
-
         })
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 1)
