@@ -42,7 +42,7 @@ def post_data():
 @pytest.fixture
 def comment_data():
     content = 'post_content_Test'
-    author = User.objects.create(username='mahnaz2', email='test2@test.dk', password='password')
+    author = User.objects.latest('pk')
     post = Post.objects.create(title="title2", content=content, author=author)
     comment = Comment.objects.create(content='comment_content_Test2', author=author, post=post)
-    return post, comment
+    return comment

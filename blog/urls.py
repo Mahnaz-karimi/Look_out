@@ -6,7 +6,8 @@ from blog.views import (
     PostCreateView,
     PostUpdateView,
     PostDeleteView,
-    CommentNewPostCreateView
+    CommentNewPostCreateView,
+    CommentDeleteView
 )
 
 app_name = 'blog'
@@ -18,4 +19,5 @@ urlpatterns = [
     path('post/comments/<int:id>/', PostCommentsView.as_view(), name='post-comments'),
     path('user/posts/<str:username>', UserPostListView.as_view(), name='user-posts'),
     path('post/new/comments/<int:id>/', CommentNewPostCreateView.as_view(), name='comment-new'),
+    path('delete/comments/<int:pk>/', CommentDeleteView.as_view(), name='comment-delete'),
 ]

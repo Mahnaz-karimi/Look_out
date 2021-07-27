@@ -1,7 +1,7 @@
 from django import urls
 import pytest
 from django.contrib.auth.models import User
-from blog.views import Post
+from blog.views import Post, Comment
 url_data = [
     ('person:login', 200),
     ('person:logout', 200),
@@ -70,15 +70,6 @@ def test_CommentNewPostCreateView(client, user_data_for_login, create_user_for_l
     })
     assert resp.status_code == 302  # Redirect to home view efter at update en post
     assert resp.url == urls.reverse('blog:blog-home')  # Efter update a Post, bliver man redirected til "/blog/"
-
-
-@pytest.mark.django_db
-def test_PostCommentsView(client, comment_data):
-    post = Post.objects.latest('pk')
-    user_url = urls.reverse('blog:post-comments', kwargs={'id': post.id})  # Se comment under en post
-    resp = client.get(user_url)
-    assert resp.status_code == 200  # Fordi vi er logget ind bliver vi ikke redirectet
-    assert "Go back" in str(resp.content)
 
 
 @pytest.mark.django_db

@@ -25,7 +25,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikrehed
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikre og skal stå først
     model = Post
     fields = ['title', 'content']
 
@@ -67,6 +67,17 @@ class CommentNewPostCreateView(LoginRequiredMixin, CreateView):
         post = get_object_or_404(Post, id=self.kwargs['id'])
         context['post'] = Post.objects.get(id=post.id)
         return context
+
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    success_url = '/blog/'  # efter delete a object så vil redirect brugeren til home side
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 
 class PostCommentsView(ListView):
