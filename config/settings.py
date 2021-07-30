@@ -15,6 +15,11 @@ from pathlib import Path
 import django_heroku
 import dj_database_url
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 if os.path.exists('/etc/blog.json'):
     with open('/etc/blog.json') as config_file:
         config = json.load(config_file)
@@ -24,6 +29,8 @@ if os.path.exists('/etc/blog.json'):
         AWS_STORAGE_BUCKET_NAME = config.get('AWS_STORAGE_BUCKET_NAME')
         DEBUG = (config.get('DEBUG_VALUE') == 'True')
         ALLOWED_HOSTS = config.get('ALLOWED_HOSTS')
+        EMAIL_HOST_USER = config.get('EMAIL_USER')
+        EMAIL_HOST_PASSWORD = config.get('EMAIL_PASS')
         DATABASES = {
             'default': {
                 'ENGINE': config.get('DB_ENGINE'),
@@ -41,6 +48,8 @@ else:
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
     DEBUG = os.environ.get('DEBUG_VALUE')
     ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+    EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
     DATABASES = {}
     if 'DYNO' in os.environ:  # Dette sker kun på Heroku, hvis man er på heroku så skal dette settes op
         DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
