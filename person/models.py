@@ -11,6 +11,9 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'  # retuneres brugernavn
 
+
+'''
+    
     def save(self, *args, **kwargs):  # Den del bliver tilføjet for at resize billede
         super(Profile, self).save(*args, **kwargs)
         # added **kwargs for at undgå fejlen: 'force_insert'
@@ -20,3 +23,5 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+            
+'''
