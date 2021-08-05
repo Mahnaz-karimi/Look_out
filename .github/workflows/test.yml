@@ -1,9 +1,9 @@
 name: Integration workflow
 on:
   push:
-    branches: ['integration']
+    branches: ['test']
   pull_request:
-    branches: ['integration']
+    branches: ['test']
 
 jobs:
   build:
