@@ -85,7 +85,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'person.apps.PersonConfig',
     'crispy_forms',
-    'storages',
+    'storages',  # AWS
 ]
 
 MIDDLEWARE = [
@@ -176,7 +176,10 @@ if os.path.exists('/etc/features.json'):
 elif 'FEATURES' in os.environ:
     FEATURES = json.loads(os.environ.get('FEATURES'))
 
+# AWS
+
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+region_name = 'AWS_S3_REGION_NAME'
+AWS_S3_REGION_NAME = 'eu-central-1'
