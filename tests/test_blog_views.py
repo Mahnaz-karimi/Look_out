@@ -85,6 +85,15 @@ def test_CommentDeleteView(client, user_data_for_login, create_user_for_login, c
 
 
 @pytest.mark.django_db
+def test_CommentDeleteViewWithOtherUser(client, user_data_for_login, create_user_for_login, comment_data2):
+    test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
+    comment = Comment.objects.latest('pk')
+    user_url = urls.reverse('blog:comment-delete', kwargs={'pk': comment.id})
+    resp = client.post(user_url)
+    assert resp.status_code == 403
+
+
+@pytest.mark.django_db
 def test_PostCommentsView(client, create_user_for_login, post_data):
     post = Post.objects.latest('pk')
     user_url = urls.reverse('blog:post-comments', kwargs={'id': post.id})  # Se komments under en post
