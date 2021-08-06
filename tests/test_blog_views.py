@@ -2,6 +2,8 @@ from django import urls
 import pytest
 from django.contrib.auth.models import User
 from blog.views import Post, Comment
+
+
 url_data = [
     ('person:login', 200),
     ('person:logout', 200),
@@ -22,16 +24,6 @@ def test_user_login(client, user_data_for_login, create_user_for_login):
     resp = client.post(login_url, data=user_data_for_login)  # Her poster en login-data til login-side
     assert resp.status_code == 302
     assert resp.url == urls.reverse('blog:blog-home')  # Når man logger ind så bliver man redirected til "/blog/"
-
-
-@pytest.mark.django_db
-def test_Post_Delete_View(client, user_data_for_login, create_user_for_login, post_data):
-    test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
-    post = Post.objects.latest('pk')
-    user_url = urls.reverse('blog:post-delete', kwargs={'pk': post.id})
-    resp = client.post(user_url)
-    assert resp.status_code == 302
-    assert resp.url == urls.reverse('blog:blog-home')
 
 
 @pytest.mark.django_db
@@ -61,6 +53,16 @@ def test_PostUpdateView(client, user_data_for_login, create_user_for_login, post
 
 
 @pytest.mark.django_db
+def test_Post_Delete_View(client, user_data_for_login, create_user_for_login, post_data):
+    test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
+    post = Post.objects.latest('pk')
+    user_url = urls.reverse('blog:post-delete', kwargs={'pk': post.id})
+    resp = client.post(user_url)
+    assert resp.status_code == 302
+    assert resp.url == urls.reverse('blog:blog-home')
+
+
+@pytest.mark.django_db
 def test_CommentNewPostCreateView(client, user_data_for_login, create_user_for_login, post_data):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     post = Post.objects.latest('pk')
@@ -73,9 +75,28 @@ def test_CommentNewPostCreateView(client, user_data_for_login, create_user_for_l
 
 
 @pytest.mark.django_db
+def test_CommentDeleteView(client, user_data_for_login, create_user_for_login, comment_data):
+    test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
+    comment = Comment.objects.latest('pk')
+    user_url = urls.reverse('blog:comment-delete', kwargs={'pk': comment.id})
+    resp = client.post(user_url)
+    assert resp.status_code == 302
+    assert resp.url == urls.reverse('blog:blog-home')
+
+
+@pytest.mark.django_db
+def test_PostCommentsView(client, create_user_for_login, post_data):
+    post = Post.objects.latest('pk')
+    user_url = urls.reverse('blog:post-comments', kwargs={'id': post.id})  # Se komments under en post
+    resp = client.get(user_url)
+    assert resp.status_code == 200  # Fordi vi bliver ikke redirectet
+    assert "Go back" in str(resp.content)
+
+
+@pytest.mark.django_db
 def test_UserPostListView(client, create_user_for_login):
     user = User.objects.latest('pk')
-    user_url = urls.reverse('blog:user-posts', kwargs={'username': user.username})  # Se sagerne under en sagsinfo
+    user_url = urls.reverse('blog:user-posts', kwargs={'username': user.username})  # Se post under en user
     resp = client.get(user_url)
     assert resp.status_code == 200  # Fordi vi er logget ind bliver vi ikke redirectet
     assert "Tibage til hovedsiden" in str(resp.content)
