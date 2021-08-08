@@ -11,6 +11,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # Post bliver forbundet med user med foreignkey.
     #  on_delete gøre at hvis en bruger bliver slettet så vil posten bliver også slettet. den gøres med Cascade
     #  med store bogstaver
+    file = models.FileField(upload_to='%Y/%m/%d', blank=True)
 
     def __str__(self):
         return self.title

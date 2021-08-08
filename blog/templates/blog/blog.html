@@ -11,6 +11,9 @@
                       {{ post.author.username }} </a>
                   <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                     <p class="text-muted">{{ post.title }}</p>
+                    {% if post.file.url is not None %}
+                    <img class="rounded-circle article-img" src="{{ post.file.url}}">
+                    {% endif %}
                 </div>
                  <div class="mr-2" ><p class="article-content">{{ post.content|safe }}</p></div>
                  <div>
