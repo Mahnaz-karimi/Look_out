@@ -17,7 +17,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern kalled pk
+        return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern
 
 
 class Photo(models.Model):
@@ -27,10 +27,14 @@ class Photo(models.Model):
 
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, null=False, blank=False)
-    image = models.FileField(null=True, blank=True)
+    image = models.FileField(null=False, blank=False, upload_to='profile_pics/%Y/%m/%d')
+    description = models.TextField()
 
     def __str__(self):
-        return "{}-{}-{}".format(self.post.title)
+        return self.description
+
+    def get_absolute_url(self):
+        return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern
 
 
 class Comment(models.Model):

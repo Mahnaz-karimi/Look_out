@@ -27,17 +27,24 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        title = request.POST['title']
-        content = request.POST['content']
-        images = request.FILES.getlist('image')
-        try:
-            post = Post.objects.create(title=title, content=content, author=self.request.user)
-            post.save()
-            photo = Photo.objects.create(post=post, image=images)
-            photo.save()
-            return redirect('blog:blog-home')
-        except():
-            return redirect('blog:post-new')
+        if request.method == 'POST':
+            try:
+                title = request.POST['title']
+                content = request.POST['content']
+                description = request.POST['description']
+                images = request.FILES.getlist('images')
+                post = Post.objects.create(title=title, content=content, author=self.request.user)
+                post.save()
+                for image in images:
+                    photo = Photo.objects.create(
+                        post=post,
+                        image=image,
+                        description=description
+                    )
+                    photo.save()
+                return redirect('blog:blog-home')
+            except():
+                return redirect('blog:post-new')
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikre og skal stå først
