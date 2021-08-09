@@ -33,7 +33,9 @@ def test_PostCreateView(client, user_data_for_login, create_user_for_login):
     resp = client.post(user_url, {          # tIlføjes en post
         'title': 'Unit test post title 1',
         'content': 'Unit test post content 1',
-        'author': create_user_for_login
+        'author': create_user_for_login,
+        'description': 'some pictures',
+        'images': 'default.jpg'
     })
     assert resp.status_code == 302  # redirect to home view efter at oprette en post
     assert resp.url == urls.reverse('blog:blog-home')  # Efter create a Post, bliver man redirected til "/blog/" home
