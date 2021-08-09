@@ -1,4 +1,4 @@
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Photo
 from django.contrib.auth.models import User
 from django.views.generic import (
     ListView, CreateView, DeleteView, UpdateView
@@ -6,6 +6,8 @@ from django.views.generic import (
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # mix in sikre os at user er logget ind
 import config.settings
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 
 class PostListView(ListView):
@@ -21,8 +23,21 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     fields = ['title', 'content']
 
     def form_valid(self, form):  # tilføje logind-brugeren som author in i post
-        form.instance.author = self.request.user  # tjekker at den er aktuelle user
+        form.instance.author = self.request.user  # adder den aktuelle user til formen
         return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        title = request.POST['title']
+        content = request.POST['content']
+        images = request.FILES.getlist('image')
+        try:
+            post = Post.objects.create(title=title, content=content, author=self.request.user)
+            post.save()
+            photo = Photo.objects.create(post=post, image=images)
+            photo.save()
+            return redirect('blog:blog-home')
+        except():
+            return redirect('blog:post-new')
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikre og skal stå først
@@ -62,7 +77,7 @@ class CommentNewPostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user  # tjekker at den er aktuelle user
         return super(CommentNewPostCreateView, self).form_valid(form)
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):  # context bliver den valgte post
         context = super().get_context_data(**kwargs)
         post = get_object_or_404(Post, id=self.kwargs['id'])
         context['post'] = Post.objects.get(id=post.id)

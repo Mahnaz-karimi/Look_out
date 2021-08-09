@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from PIL import ImageFile
 
 
 class Post(models.Model):
@@ -11,13 +12,25 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # Post bliver forbundet med user med foreignkey.
     #  on_delete gøre at hvis en bruger bliver slettet så vil posten bliver også slettet. den gøres med Cascade
     #  med store bogstaver
-    file = models.FileField(upload_to='%Y/%m/%d', blank=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern kalled pk
+
+
+class Photo(models.Model):
+    class Meta:
+        verbose_name = 'Photo'
+        verbose_name_plural = 'Photos'
+
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, null=False, blank=False)
+    image = models.FileField(null=True, blank=True)
+
+    def __str__(self):
+        return "{}-{}-{}".format(self.post.title)
 
 
 class Comment(models.Model):
