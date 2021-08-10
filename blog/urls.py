@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from blog.views import (
     PhotoListView,
     PostCommentsView,
+    PostListView,
     UserPostListView,
     PhotoCreateView,
     PostUpdateView,
@@ -14,6 +15,7 @@ from blog.views import (
 app_name = 'blog'
 urlpatterns = [
     path('', PhotoListView.as_view(), name='blog-home'),
+    path('posts/', PostListView.as_view(), name='post-view'),
     path('photo/new/', login_required(PhotoCreateView.as_view()), name='photo-new'),
     path('post/update/<int:pk>/', PostUpdateView.as_view(), name='post-update'),
     path('post/delete/<int:pk>/', PostDeleteView.as_view(), name='post-delete'),

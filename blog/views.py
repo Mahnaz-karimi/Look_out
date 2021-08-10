@@ -17,6 +17,14 @@ class PhotoListView(ListView):
     paginate_by = config.settings.PAGINATION_COUNT
 
 
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/post.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'posts'
+    ordering = ['-date_posted']  # med - vil nyeste post vil stå først
+    paginate_by = config.settings.PAGINATION_COUNT
+
+
 class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
