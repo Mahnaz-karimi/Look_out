@@ -7,13 +7,13 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # mix in sikre os at user er logget ind
 import config.settings
 from django.shortcuts import redirect
+from mimetypes import guess_type
 
 
 class PhotoListView(ListView):
     model = Photo
-    template_name = 'blog/blog.html'  # <app>/<model>_<viewtype>.html
+    template_name = 'blog/gallery.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'photos'
-    # ordering = ['-date_posted']  # med - vil nyeste post vil stå først
     paginate_by = config.settings.PAGINATION_COUNT
 
 
