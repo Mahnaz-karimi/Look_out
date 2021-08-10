@@ -18,7 +18,7 @@ class PostListView(ListView):
     paginate_by = config.settings.PAGINATION_COUNT
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
+class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
 

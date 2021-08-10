@@ -3,7 +3,7 @@ from blog.views import (
     PostListView,
     PostCommentsView,
     UserPostListView,
-    PostCreateView,
+    PhotoCreateView,
     PostUpdateView,
     PostDeleteView,
     CommentNewPostCreateView,
@@ -13,7 +13,7 @@ from blog.views import (
 app_name = 'blog'
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
-    path('post/new/', PostCreateView.as_view(), name='post-new'),
+    path('post/new/', PhotoCreateView.as_view(), name='post-new'),
     path('post/update/<int:pk>/', PostUpdateView.as_view(), name='post-update'),
     path('post/delete/<int:pk>/', PostDeleteView.as_view(), name='post-delete'),
     path('post/comments/<int:id>/', PostCommentsView.as_view(), name='post-comments'),

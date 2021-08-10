@@ -27,7 +27,7 @@ def test_user_login(client, user_data_for_login, create_user_for_login):
 
 
 @pytest.mark.django_db
-def test_PostCreateView(client, user_data_for_login, create_user_for_login):
+def test_PhotoCreateView(client, user_data_for_login, create_user_for_login):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     user_url = urls.reverse('blog:post-new')
     resp = client.post(user_url, {          # tIlføjes en post
