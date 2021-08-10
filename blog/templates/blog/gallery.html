@@ -43,16 +43,27 @@
                     {% for photo in photos %}
                     <div class="col-md-4">
                         <div class="card my-2">
+                        {% if "mp4" in photo.image.url %}
                                 <video class="embed-responsive embed-responsive-16by9" controls="controls" >
                                         <source src="{{photo.image.url}}" type="video/mp4" />
+                                <div class="card-body">
+                                <small>Beskrivelse: {{photo.description}}</small>
+                            </div>
                                 </video>
-                                <img class="image-thumbail" src="{{photo.image.url}}" typeof="image">
+                            {% if photo.post.author == user %} <!-- man kan access user hver html side -->
+                                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:photo-update' photo.id %}">Ændrer media</a>
+                            {% endif %}
+                        {% else  %}
+                                <img class="image-thumbail" src="{{photo.image.url}}">
                             <div class="card-body">
                                 <small>Beskrivelse: {{photo.description}}</small>
                             </div>
                             {% if photo.post.author == user %} <!-- man kan access user hver html side -->
                                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:photo-update' photo.id %}">Ændrer media</a>
                             {% endif %}
+                        {% endif %}
+
+
                         </div>
                     </div>
                     {% endfor %}
