@@ -6,37 +6,27 @@
                 {% endif %}
 
     <h1 class="mb-3">Alle Post</h1>
-    {% for post in posts %}
+    {% for photo in photos %}
         <post class="media content-section">
-            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> <!-- den vil vise billed af den user -->
+            <img class="rounded-circle article-img" src="{{ photo.post.author.profile.image.url }}"> <!-- den vil vise billed af den user -->
               <div class="media-body">
                   <div class="row justify-content-md-center pt-5"></div>
                   <div class="article-metadata">
-                  <a class="mr-2" href="{% url 'blog:user-posts' post.author.username %}">
-                      {{ post.author.username }} </a>
-                  <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-                    <p class="text-muted">{{ post.title }}</p>
+                  <a class="mr-2" href="{% url 'blog:user-posts' photo.post.author.username %}">
+                      {{ photo.post.author.username }} </a>
+                  <small class="text-muted">{{ photo.post.date_posted|date:"F d, Y" }}</small>
+                    <p class="text-muted">{{ photo.post.title }}</p>
                 </div>
-                 <div class="mr-2" ><p class="article-content">{{ post.content|safe }}</p></div>
-                        {% for photo in post.photo %}
-                            <div class="col-md-4">
-                                <div class="card my-2">
+                 <div class="mr-2" ><p class="article-content">{{ photo.post.content|safe }}</p></div>
                                     <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
-                                </div>
-                            </div>
-                        {% empty %}
-                            <h3>No photos...</h3>
-                        {% endfor %}
-
-
 
                  <div>
                      {% if post.author == user %} <!-- man kan access user hver html side -->
-                     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:post-update' post.id %}">Ændrer post</a>
-                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'blog:post-delete' post.id %}">Delete post </a>
+                     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:post-update' photo.post.id %}">Ændrer post</a>
+                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'blog:post-delete' photo.post.id %}">Delete post </a>
                      {% endif %}
-                      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:comment-new' post.id %}">Tilføj Kommentar</a>
-                     <h10><a class="text-muted"  href="{% url 'blog:post-comments' post.id %}" > Se kommentarer </a></h10>
+                      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:comment-new' photo.post.id %}">Tilføj Kommentar</a>
+                     <h10><a class="text-muted"  href="{% url 'blog:post-comments' photo.post.id %}" > Se kommentarer </a></h10>
                  </div>
               </div>
         </post>

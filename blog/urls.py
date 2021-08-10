@@ -1,6 +1,7 @@
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 from blog.views import (
-    PostListView,
+    PhotoListView,
     PostCommentsView,
     UserPostListView,
     PhotoCreateView,
@@ -12,8 +13,8 @@ from blog.views import (
 
 app_name = 'blog'
 urlpatterns = [
-    path('', PostListView.as_view(), name='blog-home'),
-    path('post/new/', PhotoCreateView.as_view(), name='post-new'),
+    path('', PhotoListView.as_view(), name='blog-home'),
+    path('photo/new/', login_required(PhotoCreateView.as_view()), name='photo-new'),
     path('post/update/<int:pk>/', PostUpdateView.as_view(), name='post-update'),
     path('post/delete/<int:pk>/', PostDeleteView.as_view(), name='post-delete'),
     path('post/comments/<int:id>/', PostCommentsView.as_view(), name='post-comments'),
