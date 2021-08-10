@@ -50,10 +50,13 @@
                             <div class="card-body">
                                 <small>Beskrivelse: {{photo.description}}</small>
                             </div>
+                            {% if photo.post.author == user %} <!-- man kan access user hver html side -->
+                                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:photo-update' photo.id %}">Ændrer media</a>
+                            {% endif %}
                         </div>
                     </div>
                     {% endfor %}
-                </div>
+                   </div>
             </div>
         </div>
     </div>

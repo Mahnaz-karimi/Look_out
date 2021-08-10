@@ -9,12 +9,14 @@ from blog.views import (
     PostUpdateView,
     PostDeleteView,
     CommentNewPostCreateView,
-    CommentDeleteView
+    CommentDeleteView,
+    PhotoUpdateView
 )
 
 app_name = 'blog'
 urlpatterns = [
     path('', PhotoListView.as_view(), name='blog-home'),
+    path('photo/update/<int:pk>/', PhotoUpdateView.as_view(), name='photo-update'),
     path('posts/', PostListView.as_view(), name='post-view'),
     path('photo/new/', login_required(PhotoCreateView.as_view()), name='photo-new'),
     path('post/update/<int:pk>/', PostUpdateView.as_view(), name='post-update'),

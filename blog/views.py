@@ -16,6 +16,21 @@ class PhotoListView(ListView):
     paginate_by = config.settings.PAGINATION_COUNT
 
 
+class PhotoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikre og skal stå først
+    model = Photo
+    fields = ['image', 'description']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):  # testMixin teste at brugeren som har logget ind er lige med postens author
+        photo = self.get_object()
+        if self.request.user == photo.post.author:  # tjekke at den post user is log in
+            return True
+        return False
+
+
 class PostListView(ListView):
     model = Post
     template_name = 'blog/post.html'  # <app>/<model>_<viewtype>.html
