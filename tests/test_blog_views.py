@@ -7,7 +7,7 @@ from blog.views import Post, Comment
 url_data = [
     ('person:login', 200),
     ('person:logout', 200),
-    ('blog:post-new', 302)
+    ('blog:photo-new', 302)
 ]
 
 
@@ -29,7 +29,7 @@ def test_user_login(client, user_data_for_login, create_user_for_login):
 @pytest.mark.django_db
 def test_PhotoCreateView(client, user_data_for_login, create_user_for_login):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
-    user_url = urls.reverse('blog:post-new')
+    user_url = urls.reverse('blog:photo-new')
     resp = client.post(user_url, {          # tIlføjes en post
         'title': 'Unit test post title 1',
         'content': 'Unit test post content 1',
