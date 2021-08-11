@@ -31,6 +31,17 @@ class PhotoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # M
         return False
 
 
+class PhotoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Photo
+    success_url = '/blog/'  # efter delete a object så vil redirect brugeren til home side
+
+    def test_func(self):
+        photo = self.get_object()
+        if self.request.user == photo.post.author:
+            return True
+        return False
+
+
 class PostListView(ListView):
     model = Post
     template_name = 'blog/post.html'  # <app>/<model>_<viewtype>.html
