@@ -44,8 +44,8 @@
                     <div class="col-md-4">
                         <div class="card my-2">
                             {% if "mp4" in photo.image.url %}
-                                <video class="embed-responsive embed-responsive-16by9" controls="controls" >
-                                        <source src="{{photo.image.url}}" />
+                                <video class="image-thumbail" controls="controls" >
+                                        <source src="{{photo.image.url}}" type="video/mp4" />
                                 </video>
                             {% else  %}
                                 <img class="image-thumbail" src="{{photo.image.url}}">
