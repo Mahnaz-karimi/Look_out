@@ -33,14 +33,8 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
                 description = request.POST['description']
                 images = request.FILES.getlist('images')
                 post = Post.objects.create(title=title, content=content, author=self.request.user)
-                post.save()
                 for image in images:
-                    photo = Photo.objects.create(
-                        post=post,
-                        image=image,
-                        description=description
-                    )
-                    photo.save()
+                    Photo.objects.create(post=post, image=image, description=description)
                 return redirect('blog:blog-home')
             except():
                 return redirect('blog:post-new')
