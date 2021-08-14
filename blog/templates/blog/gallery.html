@@ -43,7 +43,7 @@
                     {% for photo in photos %}
                     <div class="col-md-4">
                         <div class="card my-2">
-                            {% if "mp4" in photo.image.url %}
+                            {% if ".mp4" in photo.image.url %}
                                 <video class="image-thumbail" controls="controls" >
                                         <source src="{{photo.image.url}}" type="video/mp4" />
                                 </video>
