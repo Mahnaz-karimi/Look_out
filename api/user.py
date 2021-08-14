@@ -4,6 +4,7 @@ from lib.log import log
 from lib.slack import post_slack_message
 from lib.stringtools import get_random_string
 
+
 def register_new_user(name: str, password: str, email: str):
     # create an entry in the database
     user = create_user(name, password, email)
@@ -19,6 +20,7 @@ def register_new_user(name: str, password: str, email: str):
 
     # write server log
     log(f"User registered with email address {user.email}")
+
 
 def password_forgotten(email: str):
     # retrieve the user

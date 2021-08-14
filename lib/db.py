@@ -3,6 +3,7 @@ from hashlib import blake2b
 # the 'database' of users
 users = []
 
+
 class User:
     def __init__(self, name: str, password: str, email: str):
         self.name = name
@@ -20,11 +21,14 @@ class User:
         self.password = blake2b(new_password.encode('UTF-8')).hexdigest()
 
 # stub methods for actions related to creating a new user
+
+
 def create_user(name: str, password: str, email: str):
     print(f"DB: creating user database entry for {name} ({email}).")
     new_user = User(name, password, email)
     users.append(new_user)
     return new_user
+
 
 def find_user(email: str):
     for user in users:

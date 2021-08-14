@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth import get_user_model
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Photo
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -45,7 +45,7 @@ def photo_data():
     content = 'post_content_Test1'
     author = User.objects.latest('pk')
     post = Post.objects.create(title=title, content=content, author=author)
-    photo = Post.objects.create(post=post, image='default.jpg', description='test')
+    photo = Photo.objects.create(post=post, image='default.jpg', description='test')
     return photo
 
 
@@ -65,3 +65,4 @@ def comment_data2():
     post = Post.objects.create(title="title2", content=content, author=author)
     comment = Comment.objects.create(content='comment_content_Test2', author=author, post=post)
     return comment
+
