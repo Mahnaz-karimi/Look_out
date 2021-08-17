@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+# the 'database' of users
+users = []
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # cascade er hvis user bliver slettet
@@ -9,6 +12,13 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'  # retuneres brugernavn
+
+
+def find_user(email: str):
+    for user in users:
+        if user.email == email:
+            return user
+    raise Exception(f"User with email address {email} not found.")
 
 
 '''

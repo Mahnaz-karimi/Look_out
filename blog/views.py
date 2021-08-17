@@ -16,6 +16,30 @@ class PhotoListView(ListView):
     paginate_by = config.settings.PAGINATION_COUNT
 
 
+class PhotoCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'content']
+    template_name = 'blog/photo_form.html'
+
+    def form_valid(self, form):  # tilføje logind-brugeren som author in i post
+        form.instance.author = self.request.user  # adder den aktuelle user til formen
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            try:
+                title = request.POST['title']
+                content = request.POST['content']
+                description = request.POST['description']
+                images = request.FILES.getlist('images')
+                post = Post.objects.create(title=title, content=content, author=self.request.user)
+                for image in images:
+                    Photo.objects.create(post=post, image=image, description=description)
+                return redirect('blog:blog-home')
+            except():
+                return redirect('blog:post-new')
+
+
 class PhotoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikre og skal stå først
     model = Photo
     fields = ['image', 'description']
@@ -31,6 +55,17 @@ class PhotoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # M
         return False
 
 
+class PhotoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Photo
+    success_url = '/blog/'  # efter delete a object så vil redirect brugeren til home side
+
+    def test_func(self):
+        photo = self.get_object()
+        if self.request.user == photo.post.author:
+            return True
+        return False
+
+
 class PostListView(ListView):
     model = Post
     template_name = 'blog/post.html'  # <app>/<model>_<viewtype>.html
@@ -39,33 +74,15 @@ class PostListView(ListView):
     paginate_by = config.settings.PAGINATION_COUNT
 
 
-class PhotoCreateView(LoginRequiredMixin, CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
+    success_url = '/blog/'
+    template_name = 'blog/post_form.html'
 
     def form_valid(self, form):  # tilføje logind-brugeren som author in i post
         form.instance.author = self.request.user  # adder den aktuelle user til formen
         return super().form_valid(form)
-
-    def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            try:
-                title = request.POST['title']
-                content = request.POST['content']
-                description = request.POST['description']
-                images = request.FILES.getlist('images')
-                post = Post.objects.create(title=title, content=content, author=self.request.user)
-                post.save()
-                for image in images:
-                    photo = Photo.objects.create(
-                        post=post,
-                        image=image,
-                        description=description
-                    )
-                    photo.save()
-                return redirect('blog:blog-home')
-            except():
-                return redirect('blog:post-new')
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikre og skal stå først
