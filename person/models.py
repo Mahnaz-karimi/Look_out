@@ -34,8 +34,6 @@ class User:
 
 
 # stub methods for actions related to creating a new user
-
-
 def create_user(name: str, password: str, email: str):
     print(f"DB: creating user database entry for {name} ({email}).")
     new_user = User(name, password, email)
