@@ -77,7 +77,7 @@ class PostListView(ListView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
-    success_url = '/blog/'
+    success_url = '/blog/posts/'
     template_name = 'blog/post_form.html'
 
     def form_valid(self, form):  # tilføje logind-brugeren som author in i post
@@ -114,7 +114,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class CommentNewPostCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     fields = ['content']
-    success_url = '/blog/'
+    success_url = '/blog/posts/'
 
     def form_valid(self, form):  # tilføje logind-brugeren som author in i post
         post = get_object_or_404(Post, id=self.kwargs['id'])
@@ -131,7 +131,7 @@ class CommentNewPostCreateView(LoginRequiredMixin, CreateView):
 
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
-    success_url = '/blog/'  # efter delete a object så vil redirect brugeren til home side
+    success_url = '/blog/posts/'  # efter delete a object så vil redirect brugeren til home side
 
     def test_func(self):
         post = self.get_object()
