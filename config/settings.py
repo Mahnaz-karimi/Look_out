@@ -166,7 +166,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog:blog-home'
 LOGIN_URL = 'person:login'
 
-PAGINATION_COUNT = 5
+PAGINATION_COUNT = 3
 
 
 FEATURES = {}
@@ -183,3 +183,4 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 region_name = 'AWS_S3_REGION_NAME'
 AWS_S3_REGION_NAME = 'eu-central-1'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

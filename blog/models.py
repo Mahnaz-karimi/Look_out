@@ -35,6 +35,9 @@ class Photo(models.Model):
     def get_absolute_url(self):
         return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern
 
+    class Meta:
+        ordering = ['id']
+
 
 class Comment(models.Model):
     content = models.TextField()
