@@ -102,7 +102,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mi
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    success_url = '/blog/'  # efter delete a object så vil redirect brugeren til home side
+    success_url = '/blog/posts/'  # efter delete a object så vil redirect brugeren til home side
 
     def test_func(self):
         post = self.get_object()

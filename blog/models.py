@@ -16,7 +16,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern
+        return reverse('blog:post-view')  # reverse vil return the full path as a string url pattern
 
 
 class Photo(models.Model):
