@@ -75,7 +75,7 @@ def test_PostCreateView(client, user_data_for_login, create_user_for_login):
         'author': create_user_for_login,
     })
     assert resp.status_code == 302  # redirect to home view efter at oprette en post
-    assert resp.url == urls.reverse('blog:blog-home')  # Efter create a Post, bliver man redirected til "/blog/" home
+    assert resp.url == urls.reverse('blog:post-view')  # Efter create a Post, bliver man redirected til "/blog/" home
 
 
 @pytest.mark.django_db
@@ -88,7 +88,7 @@ def test_PostUpdateView(client, user_data_for_login, create_user_for_login, post
         'content': 'content'
     })
     assert resp.status_code == 302  # Redirect to home view efter at update en post
-    assert resp.url == urls.reverse('blog:blog-home')  # Efter update a Post, bliver man redirected til "/blog/"
+    assert resp.url == urls.reverse('blog:post-view')  # Efter update a Post, bliver man redirected til "/blog/"
 
 
 @pytest.mark.django_db
@@ -98,7 +98,7 @@ def test_Post_Delete_View(client, user_data_for_login, create_user_for_login, po
     user_url = urls.reverse('blog:post-delete', kwargs={'pk': post.id})
     resp = client.post(user_url)
     assert resp.status_code == 302
-    assert resp.url == urls.reverse('blog:blog-home')
+    assert resp.url == urls.reverse('blog:post-view')
 
 
 @pytest.mark.django_db
@@ -110,7 +110,7 @@ def test_CommentNewPostCreateView(client, user_data_for_login, create_user_for_l
         'content': 'content1'
     })
     assert resp.status_code == 302  # Redirect to home view efter at update en post
-    assert resp.url == urls.reverse('blog:blog-home')  # Efter update a Post, bliver man redirected til "/blog/"
+    assert resp.url == urls.reverse('blog:post-view')  # Efter update a Post, bliver man redirected til "/blog/"
 
 
 @pytest.mark.django_db
@@ -120,7 +120,7 @@ def test_CommentDeleteView(client, user_data_for_login, create_user_for_login, c
     user_url = urls.reverse('blog:comment-delete', kwargs={'pk': comment.id})
     resp = client.post(user_url)
     assert resp.status_code == 302
-    assert resp.url == urls.reverse('blog:blog-home')
+    assert resp.url == urls.reverse('blog:post-view')
 
 
 @pytest.mark.django_db
