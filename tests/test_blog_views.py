@@ -88,7 +88,7 @@ def test_PostUpdateView(client, user_data_for_login, create_user_for_login, post
         'content': 'content'
     })
     assert resp.status_code == 302  # Redirect to home view efter at update en post
-    assert resp.url == urls.reverse('blog:post-view')  # Efter update a Post, bliver man redirected til "/blog/"
+    assert resp.url == urls.reverse('blog:post-detail-view', kwargs={'pk': post.id})  # Efter update a Post, bliver man redirected til "/blog/"
 
 
 @pytest.mark.django_db
