@@ -11,12 +11,13 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # Post bliver forbundet med user med foreignkey.
     #  on_delete gøre at hvis en bruger bliver slettet så vil posten bliver også slettet. den gøres med Cascade
     #  med store bogstaver
+    likes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post-view')  # reverse vil return the full path as a string url pattern
+        return reverse('blog:post-detail-view', args=[self.id])  # reverse vil return the full path as a string url pattern
 
 
 class Photo(models.Model):

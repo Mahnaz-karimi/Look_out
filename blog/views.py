@@ -1,7 +1,7 @@
 from blog.models import Post, Comment, Photo
 from django.contrib.auth.models import User
 from django.views.generic import (
-    ListView, CreateView, DeleteView, UpdateView
+    ListView, CreateView, DeleteView, UpdateView, DetailView
 )
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # mix in sikre os at user er logget ind
@@ -111,6 +111,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
+
 class CommentNewPostCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     fields = ['content']
@@ -148,6 +149,15 @@ class PostCommentsView(ListView):
         context = super(PostCommentsView, self).get_context_data(**kwargs)
         post = get_object_or_404(Post, id=self.kwargs['id'])
         context = {'comments': Comment.objects.filter(post=post.id)}
+        return context
+
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/post_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         return context
 
 

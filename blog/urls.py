@@ -12,7 +12,8 @@ from blog.views import (
     CommentDeleteView,
     PhotoUpdateView,
     PhotoDeleteView,
-    PostCreateView
+    PostCreateView,
+    PostDetailView,
 )
 
 app_name = 'blog'
@@ -23,6 +24,7 @@ urlpatterns = [
     path('photo/new/', login_required(PhotoCreateView.as_view()), name='photo-new'),
 
     path('posts/', PostListView.as_view(), name='post-view'),
+    path('posts/detail/<int:pk>/', PostDetailView.as_view(), name='post-detail-view'),
     path('post/new/', PostCreateView.as_view(), name='post-new'),
     path('post/update/<int:pk>/', PostUpdateView.as_view(), name='post-update'),
     path('post/delete/<int:pk>/', PostDeleteView.as_view(), name='post-delete'),

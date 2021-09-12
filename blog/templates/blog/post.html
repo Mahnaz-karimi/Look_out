@@ -10,10 +10,11 @@
                   <a class="mr-2" href="{% url 'blog:user-posts' post.author.username %}">
                       {{ post.author.username }} </a>
                   <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-                    <p class="text-muted">{{ post.title }}</p>
-                </div>
-                 <div class="mr-2" ><p class="article-content">{{ post.content|safe }}</p></div>
-                 <div>
+                     <div class="col-12"><h1>
+                        <a class="text-dark" href="{{post.get_absolute_url}}">{{post.title}}</a>
+                        </h1>
+                     </div>
+
                      {% if post.author == user %} <!-- man kan access user hver html side -->
                      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:post-update' post.id %}">Ændrer post</a>
                      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'blog:post-delete' post.id %}">Delete post </a>
