@@ -111,7 +111,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-
 class CommentNewPostCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     fields = ['content']
