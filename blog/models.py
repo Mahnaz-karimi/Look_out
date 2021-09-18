@@ -38,8 +38,6 @@ class Photo(models.Model):
         return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern
 
 
-
-
 class Comment(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
