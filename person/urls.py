@@ -1,4 +1,4 @@
-from person.views import register, profile
+from person.views import register, profile, view
 from django.urls import path
 from person.views import LoginView
 from django.contrib.auth import views as auth_views
@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('logout/', auth_views.LogoutView.as_view(template_name='person/logout.html'),
          name='logout'),
+    path('adminlte/', view, name='adminlte'),
 ]

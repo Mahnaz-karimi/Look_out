@@ -12,6 +12,10 @@ class LoginView(auth_views.LoginView):
         return context
 
 
+def view(request):
+    return render(request, 'person/index_lte.html')
+
+
 @login_required  # kræves at brugeren har logget ind for at vise profile side.
 def register(request):  # register en bruger
     if request.method == 'POST':
