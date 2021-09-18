@@ -1,5 +1,28 @@
 {% extends 'person/adminlte_base.html' %}<!-- EKSTENDER TIL EN ANDEN SIDE -->
 {% load crispy_forms_tags %}
-{% block content %}
-<p> Hellllllllllllllo {{user.name}} </p>
-{% endblock content %}
+<p> {{user}} </p>
+{% block title %}List af emner{% endblock %}
+{% block main %}Welcomme {{user}}
+<div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Slug</th>
+                      <th>Category</th>
+                      <th>Discription</th>
+                      <th>Image</th>
+                        <th>Publish</th>
+                        <th>Created</th>
+                        <th>Status</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

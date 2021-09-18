@@ -1,5 +1,4 @@
 {% load static %}
-{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,30 +7,30 @@
   <title>AdminLTE 3 | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{% static 'staticfiles/adminlte/plugins/fontawesome-free/css/all.min.css' %}">
+   <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/fontawesome-free/css/all.min.css' %}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="{% static 'staticfiles/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
   <!-- iCheck -->
-  <link rel="stylesheet" href="{% static 'staticfiles/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="{% static 'staticfiles/adminlte/plugins/jqvmap/jqvmap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/jqvmap/jqvmap.min.css' %}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{% static 'staticfiles/adminlte/dist/css/adminlte.min.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/adminlte.min.css' %}">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{% static 'staticfiles/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="{% static 'staticfiles/adminlte/plugins/daterangepicker/daterangepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/daterangepicker/daterangepicker.css' %}">
   <!-- summernote -->
-  <link rel="stylesheet" href="{% static 'staticfiles/adminlte/plugins/summernote/summernote-bs4.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/summernote/summernote-bs4.css' %}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Bootstrap 4 RTL -->
   <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
   <!-- Custom style for RTL -->
-  <link rel="stylesheet" href="{% static 'staticfiles/adminlte/dist/css/custom.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/custom.css' %}">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -44,68 +43,43 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="{% url 'person:login' %}" class="nav-link">Login page</a> <!-- bruge url fra account application url login -->
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="{% url 'blog:blog-home' %}" target="_blank" class="nav-link">View of the site</a><!-- bruge url fra blog application url home -->
       </li>
     </ul>
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index_lte.html" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      </div>
-</side>
-    <!-- /.content -->
+  </nav>
+  <!-- /.navbar -->
+{% include 'person/sidebar.html' %}  <!-- dette includere den ande html here -->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">{% block title %}Alle emner{% endblock %}</h1><!-- laver en block som title vil stå her og derefter under home page som ekstent til den project skal også have blogen-->
+          </div><!-- /.col -->
+
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+       {% block main %}Block mani ??{% endblock %} <!-- laver en block som main data vil stå her og derefter under home page som ekstent til den project skal også have blogen-->
+        <!-- Main row -->
+        </div>
+          <!-- Left col -->
+          </section >
+  </div>
 
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.0-rc.1
-    </div>
+ <STRONG> DJANGO </STRONG>
   </footer>
 
   <!-- Control Sidebar -->
@@ -117,9 +91,9 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{% static 'staticfiles/adminlte/plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/jquery/jquery.min.js' %}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="{% static 'staticfiles/adminlte/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
@@ -127,30 +101,32 @@
 <!-- Bootstrap 4 rtl -->
 <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="{% static 'staticfiles/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!-- ChartJS -->
-<script src="{% static 'staticfiles/adminlte/plugins/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/chart.js/Chart.min.js' %}"></script>
 <!-- Sparkline -->
-<script src="{% static 'staticfiles/adminlte/plugins/sparklines/sparkline.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/sparklines/sparkline.js' %}"></script>
 <!-- JQVMap -->
-<script src="{% static 'staticfiles/adminlte/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
-<script src="{% static 'staticfiles/adminlte/plugins/jqvmap/maps/jquery.vmap.world.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/jqvmap/maps/jquery.vmap.world.js' %}"></script>
 <!-- jQuery Knob Chart -->
-<script src="{% static 'staticfiles/adminlte/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
 <!-- daterangepicker -->
-<script src="{% static 'staticfiles/adminlte/plugins/moment/moment.min.js' %}"></script>
-<script src="{% static 'staticfiles/adminlte/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/daterangepicker/daterangepicker.js' %}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="{% static 'staticfiles/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
 <!-- Summernote -->
-<script src="{% static 'staticfiles/adminlte/plugins/summernote/summernote-bs4.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/summernote/summernote-bs4.min.js' %}"></script>
 <!-- overlayScrollbars -->
-<script src="{% static 'staticfiles/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+<script src="{% static 'registration/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
 <!-- AdminLTE App -->
-<script src="{% static 'staticfiles/adminlte/dist/js/adminlte.js' %}"></script>
+<script src="{% static 'registration/adminlte/dist/js/adminlte.js' %}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{% static 'staticfiles/adminlte/dist/js/pages/dashboard.js' %}"></script>
+<script src="{% static 'registration/adminlte/dist/js/pages/dashboard.js' %}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{% static 'staticfiles/adminlte/dist/js/demo.js' %}"></script>
+
+<script src="{% static 'registration/adminlte/dist/js/demo.js' %}"></script>
+
 </body>
 </html>
