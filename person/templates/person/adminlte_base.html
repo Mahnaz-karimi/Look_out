@@ -51,7 +51,7 @@
     </ul>
   </nav>
   <!-- /.navbar -->
-{% include 'person/sidebar.html' %}  <!-- dette includere den ande html here -->
+{% include 'person/sidebar.html' %}  <!-- dette includere pagen fra person/sidebar.html here -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -59,18 +59,20 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">{% block title %}Alle emner{% endblock %}</h1><!-- laver en block som title vil stå her og derefter under home page som ekstent til den project skal også have blogen-->
+            <h1 class="m-0 text-dark">{% block title %}Alle emner{% endblock %}</h1><!-- laver en block med navnet 'title' som data fra index_lte's side vil stå
+       her og derefter under index_lte page som ekstent til den html skal også have block med navn 'title'-->
+
           </div><!-- /.col -->
 
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-       {% block main %}Block mani ??{% endblock %} <!-- laver en block som main data vil stå her og derefter under home page som ekstent til den project skal også have blogen-->
+       {% block main %}woww{% endblock %} <!-- laver en block med navnet 'main' som data fra index_lte's side vil stå
+       her og derefter under index_lte page som ekstent til den html skal også have block med navn 'main'-->
         <!-- Main row -->
         </div>
           <!-- Left col -->
