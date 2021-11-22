@@ -1,4 +1,4 @@
-##  Django project written in Python that connected to Pstgress sql depolied on Heroku.
+##  Django project written in Python that connected to Postgresql deployed on Heroku.
 
 ### The most commonly used commands 
 
