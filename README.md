@@ -4,7 +4,7 @@
 
 ### The most commonly used commands 
 
-### Run the project
+### For run the project
 
 - python3 manage.py runserver
 
