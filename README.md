@@ -1,4 +1,4 @@
-##  Django project written in Python that connected to Postgresql Database deployed on 2 Heroku websites using Github-actions for CI/CD Piplines and pytest for teste the program.
+##  web application with i.a. Python, Django and Bootstrap, automated testing and CI / CD with GitHub actions, which I used to pytest, integrate and deploy an application for both a test environment and a production environment, connected to Postgresql Database, used Amazon Web Services, AWS, for file storage.
 
 
 ### To run the project
