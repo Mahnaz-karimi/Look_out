@@ -10,7 +10,7 @@
 
 ### For changing of heroku websites
 
-- heroku git:remote -a <app name>
+- heroku git:remote -a [app name]
   
 ### For changing of heroku websites  
 
