@@ -1,13 +1,29 @@
-##  Django project written in Python that connected to Postgresql Database deployed on 2 Heroku websites using Github-actions for CI/CD Piplines.
+##  Django project written in Python that connected to Postgresql Database deployed on 2 Heroku websites using Github-actions for CI/CD Piplines and pytest for teste the program.
+
+
 
 ### The most commonly used commands 
 
-- git push heroku master
+### Run the project
 
-- git push heroku <branch-name>:master
+- python3 manage.py runserver
+
+### For changing of heroku websites
 
 - heroku git:remote -a <app name>
   
-- python3 manage.py collectstatic
+### For changing of heroku websites  
+
+- git push heroku master
+
+- git push heroku <branch-name>:master    
+
+### overwrite existing static files and write static files
+
+  - python3 manage.py collectstatic
+
+
   
-- python3 manage.py runserver
+
+  
+
