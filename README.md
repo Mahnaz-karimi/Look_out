@@ -4,21 +4,21 @@
 
 ### The most commonly used commands 
 
-### For run the project
+### To run the project
 
 - python3 manage.py runserver
 
-### For changing of heroku websites
+### To change of heroku websites
 
-- heroku git:remote -a [app name]
+- heroku git:remote -a app-name
   
-### For changing of heroku websites  
+### To deploy the project to the heroku websites via different branches
 
 - git push heroku master
 
-- git push heroku <branch-name>:master    
+- git push heroku branch-name:master    
 
-### overwrite existing static files and write static files
+### To overwrite existing static files or write static files
 
   - python3 manage.py collectstatic
 
