@@ -1,9 +1,6 @@
 ##  Django project written in Python that connected to Postgresql Database deployed on 2 Heroku websites using Github-actions for CI/CD Piplines and pytest for teste the program.
 
 
-
-### The most commonly used commands 
-
 ### To run the project
 
 - python3 manage.py runserver
