@@ -53,3 +53,9 @@ class Comment(models.Model):
 class Youtube(models.Model):
     content = models.TextField(default="Videos")
     video = EmbedVideoField()
+
+    def __str__(self):
+        return self.content
+
+    def get_absolute_url(self):
+        return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern
