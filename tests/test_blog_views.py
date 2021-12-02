@@ -42,7 +42,8 @@ def test_PhotoUpdateView(client, user_data_for_login, create_user_for_login, pho
     user_url = urls.reverse('blog:photo-update', kwargs={'pk': photo.pk})  # Se comment under en post
     resp = client.post(user_url, {
         'description': 'title',
-        'image': 'default.jpg'
+        'image': 'default.jpg',
+        'author': create_user_for_login,
     })
     assert resp.status_code == 302  # Redirect to home view efter at update en photo
     assert resp.url == urls.reverse('blog:blog-home')  # Efter update a photo, bliver man redirected til "/blog/"

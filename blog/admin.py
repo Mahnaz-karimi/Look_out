@@ -25,7 +25,6 @@ admin.site.register(Photo, ClientDetailsAdmin)
 class MyModelAdmin(AdminVideoMixin, admin.ModelAdmin):
     pass
 
-
 admin.site.register(Youtube, MyModelAdmin)
 
 

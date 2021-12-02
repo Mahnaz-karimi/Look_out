@@ -41,11 +41,8 @@ def post_data():
 
 @pytest.fixture
 def photo_data():
-    title = "title1"
-    content = 'post_content_Test1'
     author = User.objects.latest('pk')
-    post = Post.objects.create(title=title, content=content, author=author)
-    photo = Photo.objects.create(post=post, image='default.jpg', description='test')
+    photo = Photo.objects.create(author=author, image='default.jpg', description='test')
     return photo
 
 
