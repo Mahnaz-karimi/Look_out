@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'person.apps.PersonConfig',
     'crispy_forms',
     'storages',  # AWS
+    'embed_video',
 ]
 
 MIDDLEWARE = [

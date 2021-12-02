@@ -1,4 +1,5 @@
-from blog.models import Post, Comment, Photo
+from blog.models import Post, Comment, Photo, Youtube
+from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.views.generic import (
     ListView, CreateView, DeleteView, UpdateView, DetailView
@@ -7,6 +8,11 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # mix in sikre os at user er logget ind
 import config.settings
 from django.shortcuts import redirect
+
+
+def videos(request):
+    obj = Youtube.objects.all()
+    return render(request, 'blog/youtube.html', {'obj': obj})
 
 
 class PhotoListView(ListView):
@@ -169,3 +175,4 @@ class UserPostListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('date_posted')
+
