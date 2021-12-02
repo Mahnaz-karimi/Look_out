@@ -23,24 +23,21 @@ class PhotoListView(ListView):
 
 
 class PhotoCreateView(LoginRequiredMixin, CreateView):
-    model = Post
-    fields = ['title', 'content']
+    model = Photo
+    fields = ['image', 'description']
     template_name = 'blog/photo_form.html'
 
     def form_valid(self, form):  # tilføje logind-brugeren som author in i post
         form.instance.author = self.request.user  # adder den aktuelle user til formen
-        return super().form_valid(form)
+        return super(PhotoCreateView, self).form_valid(form) ### self ra ezafe kardam
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):  # save pictures
         if request.method == 'POST':
             try:
-                title = request.POST['title']
-                content = request.POST['content']
                 description = request.POST['description']
                 images = request.FILES.getlist('images')
-                post = Post.objects.create(title=title, content=content, author=self.request.user)
                 for image in images:
-                    Photo.objects.create(post=post, image=image, description=description)
+                    Photo.objects.create(image=image, description=description)
                 return redirect('blog:blog-home')
             except():
                 return redirect('blog:post-new')
@@ -56,7 +53,7 @@ class PhotoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # M
 
     def test_func(self):  # testMixin teste at brugeren som har logget ind er lige med postens author
         photo = self.get_object()
-        if self.request.user == photo.post.author:  # tjekke at den post user is log in
+        if self.request.user == photo.author:  # tjekke at den post user is log in
             return True
         return False
 
@@ -67,7 +64,7 @@ class PhotoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         photo = self.get_object()
-        if self.request.user == photo.post.author:
+        if self.request.user == photo.author:
             return True
         return False
 
