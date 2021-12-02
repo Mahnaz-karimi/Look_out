@@ -15,6 +15,8 @@
 
 - git push heroku branch-name:master    
 
+- heroku run python manage.py migrate
+
 ### To overwrite existing static files or write static files
 
   - python3 manage.py collectstatic
