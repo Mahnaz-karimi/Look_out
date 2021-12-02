@@ -27,17 +27,13 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
     fields = ['image', 'description']
     template_name = 'blog/photo_form.html'
 
-    def form_valid(self, form):  # tilføje logind-brugeren som author in i post
-        form.instance.author = self.request.user  # adder den aktuelle user til formen
-        return super(PhotoCreateView, self).form_valid(form) ### self ra ezafe kardam
-
     def post(self, request, *args, **kwargs):  # save pictures
         if request.method == 'POST':
             try:
                 description = request.POST['description']
                 images = request.FILES.getlist('images')
                 for image in images:
-                    Photo.objects.create(image=image, description=description)
+                    Photo.objects.create(image=image, description=description, author=self.request.user)
                 return redirect('blog:blog-home')
             except():
                 return redirect('blog:post-new')
