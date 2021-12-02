@@ -11,11 +11,5 @@ class AuthorAdmin(admin.ModelAdmin):
 admin.site.register(Post, AuthorAdmin)
 admin.site.register(Comment)
 admin.site.register(Photo)
-
-
-class MyModelAdmin(AdminVideoMixin, admin.ModelAdmin):
-    pass
-
-
-admin.site.register(Youtube, MyModelAdmin)
+admin.site.register(Youtube)
 
