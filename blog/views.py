@@ -9,7 +9,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  
 import config.settings
 from django.shortcuts import redirect
 
-
 def videos(request):
     obj = Youtube.objects.all()
     return render(request, 'blog/youtube.html', {'obj': obj})
