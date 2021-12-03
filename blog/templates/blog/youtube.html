@@ -19,7 +19,8 @@
   <h1 class="text-center">VIDEOS</h1>
   <div class="container"   ></div>
     {%  for i in obj %}
-    {% video i.video 'small' %}
+        {% video i.video %}
+    {{i.content}}
     {% endfor %}
 
 
