@@ -29,7 +29,10 @@ class Photo(models.Model):
 
     image = models.FileField(null=False, blank=False, upload_to='profile_pics/%Y/%m/%d')
     description = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True )  # Post bliver forbundet med user med foreignkey.
+    user = User.objects.get(id=14)
+    user.id = 1
+    user.save()
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)  # Post bliver forbundet med user med foreignkey.
 
     def __str__(self):
         return self.description
