@@ -21,15 +21,14 @@ def test_user_login(client, user_data_for_login, create_user_for_login):
 
 
 @pytest.mark.django_db
-def test_PhotoCreateView(client, user_data_for_login, create_user_for_login):
+def test_PhotoCreateView(client, user_data_for_login, create_user_for_login, create_Category):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     user_url = urls.reverse('blog:photo-new')
-    resp = client.post(user_url, {          # tIlføjes en photo
-        'title': 'Unit test post title 1',
-        'content': 'Unit test post content 1',
+    resp = client.post(user_url, {         # tIlføjes en photo
         'author': create_user_for_login,
         'description': 'some pictures',
-        'images': 'default.jpg'
+        'images': 'default.jpg',
+        'category': create_Category.id,
     })
     assert resp.status_code == 302  # redirect to home view efter at oprette en photo
     assert resp.url == urls.reverse('blog:blog-home')  # Efter create a photo, bliver man redirected til "/blog/" home
@@ -44,6 +43,7 @@ def test_PhotoUpdateView(client, user_data_for_login, create_user_for_login, pho
         'description': 'title',
         'image': 'default.jpg',
         'author': create_user_for_login,
+        'category': photo.category.id,
     })
     assert resp.status_code == 302  # Redirect to home view efter at update en photo
     assert resp.url == urls.reverse('blog:blog-home')  # Efter update a photo, bliver man redirected til "/blog/"

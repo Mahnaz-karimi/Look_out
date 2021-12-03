@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth import get_user_model
-from blog.models import Post, Comment, Photo
+from blog.models import Post, Comment, Photo, Category
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -42,7 +42,8 @@ def post_data():
 @pytest.fixture
 def photo_data():
     author = User.objects.latest('pk')
-    photo = Photo.objects.create(author=author, image='default.jpg', description='test')
+    category = Category.objects.create(name="Ny")
+    photo = Photo.objects.create(author=author, image='default.jpg', description='test', category=category)
     return photo
 
 
@@ -63,3 +64,8 @@ def comment_data2():
     comment = Comment.objects.create(content='comment_content_Test2', author=author, post=post)
     return comment
 
+
+@pytest.fixture
+def create_Category():
+    category = Category.objects.create(name="Ny")
+    return category

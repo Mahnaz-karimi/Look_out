@@ -5,6 +5,13 @@ from django.urls import reverse
 from embed_video.fields import EmbedVideoField
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=32, default='NEW')
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100, blank=True)
     content = models.TextField()
@@ -30,6 +37,7 @@ class Photo(models.Model):
     image = models.FileField(null=False, blank=False, upload_to='profile_pics/%Y/%m/%d')
     description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # Post bliver forbundet med user med foreignkey.
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, blank=True)
 
     def __str__(self):
         return self.description

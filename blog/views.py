@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  
 import config.settings
 from django.shortcuts import redirect
 
+
 def videos(request):
     obj = Youtube.objects.all()
     return render(request, 'blog/youtube.html', {'obj': obj})
@@ -23,16 +24,17 @@ class PhotoListView(ListView):
 
 class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Photo
-    fields = ['image', 'description']
+    fields = ['image', 'description', 'category']
     template_name = 'blog/photo_form.html'
 
     def post(self, request, *args, **kwargs):  # save pictures
         if request.method == 'POST':
             try:
                 description = request.POST['description']
+                category = request.POST['category']
                 images = request.FILES.getlist('images')
                 for image in images:
-                    Photo.objects.create(image=image, description=description, author=self.request.user)
+                    Photo.objects.create(image=image, description=description, author=self.request.user, category=category.id)
                 return redirect('blog:blog-home')
             except():
                 return redirect('blog:post-new')
