@@ -13,28 +13,40 @@
 
     <title>videos</title>
   </head>
-  <body>
-
-
-  <h1 class="text-center">VIDEOS</h1>
-  <div class="container"   ></div>
-  <div class="col-md-9">
-                <div class="row">
-                     {%  for i in obj %}
-                    <div class="col-md-4">
-                        <div class="card my-2">
-
-        {% video i.video %}
-        {{i.content}}
-
+  <body><div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% if request.user.is_authenticated %}
+                    <div class="card">
+                        <div class="card-header">
+                            Menu
                         </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                            </li>
+                            <a href="{% url 'blog:video-new' %}" class="btn btn-dark btn-block btn-sm m-1">Add Video</a>
+                            <a href="{% url 'person:logout' %}" class="btn btn-dark btn-block btn-sm m-1">Logout</a>
+                        </ul>
                     </div>
+                {% endif %}
+            </div>
+          <h1 class="text-center">VIDEOS</h1>
+          <div class="container"   ></div>
+          <div class="col-md-9">
+            <div class="row">
+                 {%  for i in obj %}
+                <div class="col-md-4">
+                    <div class="card my-2">
 
+                    {% video i.video %}
+                    {{i.content}}
 
-    {% endfor %}
-
-</div>
-  </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+          </div>
+        </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

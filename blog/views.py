@@ -15,6 +15,17 @@ def videos(request):
     return render(request, 'blog/youtube.html', {'obj': obj})
 
 
+class VideoCreateView(LoginRequiredMixin, CreateView):
+    model = Youtube
+    fields = ['content', 'video']
+    template_name = 'blog/video_form.html'
+    success_url = '/blog/youtube/videos'
+
+    def form_valid(self, form):  # tilføje logind-brugeren som author in i post
+        form.instance.author = self.request.user  # adder den aktuelle user til formen
+        return super().form_valid(form)
+
+
 class PhotoListView(ListView):
     model = Photo
     template_name = 'blog/gallery.html'  # <app>/<model>_<viewtype>.html

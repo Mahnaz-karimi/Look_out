@@ -15,6 +15,7 @@ from blog.views import (
     PostCreateView,
     PostDetailView,
     videos,
+    VideoCreateView,
 )
 
 app_name = 'blog'
@@ -36,4 +37,5 @@ urlpatterns = [
     path('delete/comments/<int:pk>/', CommentDeleteView.as_view(), name='comment-delete'),
 
     path('youtube/videos', videos, name='youtube-videos'),
+    path('video/new/', login_required(VideoCreateView.as_view()), name='video-new'),
 ]
