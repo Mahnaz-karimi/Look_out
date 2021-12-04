@@ -66,6 +66,6 @@ def comment_data2():
 
 
 @pytest.fixture
-def create_Category():
+def create_category():
     category = Category.objects.create(name="Ny")
     return category

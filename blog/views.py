@@ -26,18 +26,11 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Photo
     fields = ['image', 'description', 'category']
     template_name = 'blog/photo_form.html'
+    success_url = '/blog/'
 
-    def post(self, request, *args, **kwargs):  # save pictures
-        if request.method == 'POST':
-            try:
-                description = request.POST['description']
-                category = request.POST['category']
-                images = request.FILES.getlist('images')
-                for image in images:
-                    Photo.objects.create(image=image, description=description, author=self.request.user, category=category.id)
-                return redirect('blog:blog-home')
-            except():
-                return redirect('blog:post-new')
+    def form_valid(self, form):  # tilføje logind-brugeren som author in i post
+        form.instance.author = self.request.user  # adder den aktuelle user til formen
+        return super().form_valid(form)
 
 
 class PhotoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikre og skal stå først
