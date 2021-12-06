@@ -7,6 +7,7 @@ from django.views.generic import (
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # mix in sikre os at user er logget ind
 import config.settings
+from django.shortcuts import redirect
 
 
 def videos(request):
@@ -34,13 +35,27 @@ class PhotoListView(ListView):
 
 class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Photo
-    fields = ['image', 'description', 'category']
+    fields = ['description']
     template_name = 'blog/photo_form.html'
     success_url = '/blog/'
+    context_object_name = 'photos'
 
     def form_valid(self, form):  # tilføje logind-brugeren som author in i post
         form.instance.author = self.request.user  # adder den aktuelle user til formen
         return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):  # save pictures
+        if request.method == 'POST':
+            try:
+                description = request.POST['description']
+
+                images = request.FILES.getlist('images')
+                for image in images:
+                    Photo.objects.create(image=image, description=description,
+                                         author=self.request.user)
+                return redirect('blog:blog-home')
+            except():
+                return redirect('blog:post-new')
 
 
 class PhotoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikre og skal stå først

@@ -19,6 +19,15 @@ def user_data_for_register():
 
 
 @pytest.fixture
+def data_for_create_photo():
+    return {
+        'image': 'default.jpg',
+        'description': 'pictures',
+
+    }
+
+
+@pytest.fixture
 def user_data_for_login():
     return {'username': 'user_name', 'password': 'tests123'}
 
@@ -67,5 +76,5 @@ def comment_data2():
 
 @pytest.fixture
 def create_category():
-    category = Category.objects.create(name="Ny")
+    category = Category.objects.create(name="new")
     return category

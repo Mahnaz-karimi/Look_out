@@ -21,19 +21,13 @@ def test_user_login(client, user_data_for_login, create_user_for_login):
 
 
 @pytest.mark.django_db
-def test_PhotoCreateView(client, user_data_for_login, create_user_for_login, create_category):
+def test_PhotoCreateView(client, user_data_for_login, create_user_for_login, data_for_create_photo):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     user_url = urls.reverse('blog:photo-new')
-
-    # resp = client.post(user_url, {  # en client får fat i den user-url og derefter sender de data med post method
-    #     'image': 'default.jpg',
-    #     'description': 'pictures',
-    #     'author': create_user_for_login,
-    #     'category': create_category,
-    # })
-    # print("print form : ", str(user_url))
-    # assert resp.status_code == 200  # redirect to home view efter at oprette en photo
-    # assert resp.url == urls.reverse('blog:blog-home')  # Efter create a photo, bliver man redirected til "/blog/" home
+    resp = client.post(user_url, data=data_for_create_photo)
+    print("print form : ", str(resp))
+    assert resp.status_code == 302  # redirect to home view efter at oprette en photo
+    assert resp.url == urls.reverse('blog:blog-home')  # Efter create a photo, bliver man redirected til "/blog/" home
 
 
 @pytest.mark.django_db
@@ -76,7 +70,6 @@ def test_PostCreateView(client, user_data_for_login, create_user_for_login):
     resp = client.post(user_url, {         # en client får fat i den user-url og derefter sender de data med post method
         'title': 'Unit test post title 1',
         'content': 'Unit test post content 1',
-        'author': create_user_for_login,
     })
     print("PostCreate : ", str(resp))
     assert resp.status_code == 302  # redirect to home view efter at oprette en post

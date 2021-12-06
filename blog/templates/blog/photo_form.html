@@ -6,7 +6,12 @@
              {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">Opret post</legend>
-                        {{ form|crispy }}  <!-- for at felterne står i to linje skrives  form.as_p  -->
+
+                    {{ form|crispy }}  <!-- for at felterne står i to linje skrives  form.as_p  -->
+
+                    <div class="form-group m-3">
+                                <input required name="images" type="file" multiple class="form-control-file">
+                    </div>
                 </fieldset>
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Send</button>

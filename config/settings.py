@@ -172,7 +172,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog:blog-home'
 LOGIN_URL = 'person:login'
 
-PAGINATION_COUNT = 10
+PAGINATION_COUNT = 12
 
 
 FEATURES = {}
