@@ -1,15 +1,21 @@
 from django import urls
 import pytest
 from django.contrib.auth.models import User
-from blog.models import Post, Comment, Photo, Category
+from blog.models import Post, Comment, Photo, Youtube
 
 
 url_data = [
     ('person:login', 200),
     ('person:logout', 200),
-    ('blog:photo-new', 302),
-
+    ('blog:photo-new', 302)
 ]
+
+
+@pytest.mark.parametrize("url, expected", url_data)
+def test_post_views(client, url, expected):
+    temp_url = urls.reverse(url)
+    resp = client.get(temp_url)
+    assert resp.status_code == expected
 
 
 @pytest.mark.django_db
@@ -54,13 +60,6 @@ def test_PhotoDeleteView(client, user_data_for_login, create_user_for_login, pho
     resp = client.post(user_url)
     assert resp.status_code == 302
     assert resp.url == urls.reverse('blog:blog-home')
-
-
-@pytest.mark.parametrize("url, expected", url_data)
-def test_post_views(client, url, expected):
-    temp_url = urls.reverse(url)
-    resp = client.get(temp_url)
-    assert resp.status_code == expected
 
 
 @pytest.mark.django_db
@@ -146,5 +145,15 @@ def test_UserPostListView(client, create_user_for_login):
     resp = client.get(user_url)
     assert resp.status_code == 200  # Fordi vi er logget ind bliver vi ikke redirectet
     assert "Tibage til hovedsiden" in str(resp.content)
+
+
+@pytest.mark.django_db
+def test_youtube_CreateView(client, user_data_for_login, create_user_for_login, data_for_youtube):
+    test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind fordi i youtube.html
+    user_url = urls.reverse('blog:video-new')
+    resp = client.post(user_url, data=data_for_youtube)
+    print("print form : ", str(resp))
+    assert resp.status_code == 302  # redirect to home view efter at oprette en photo
+    assert resp.url == urls.reverse('blog:youtube-videos')  # Efter create a photo, bliver man redirected til "/blog/" home
 
 

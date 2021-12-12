@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth import get_user_model
-from blog.models import Post, Comment, Photo, Category
+from blog.models import Post, Comment, Photo, Category, Youtube
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -30,6 +30,14 @@ def data_for_create_photo():
 @pytest.fixture
 def user_data_for_login():
     return {'username': 'user_name', 'password': 'tests123'}
+
+
+@pytest.fixture
+def data_for_youtube():
+    return {
+        'content': 'test',
+        'video': 'https://www.youtube.com/watch?v=Geq60OVyBPg&t=8s'
+    }
 
 
 @pytest.fixture
@@ -72,9 +80,3 @@ def comment_data2():
     post = Post.objects.create(title="title2", content=content, author=author)
     comment = Comment.objects.create(content='comment_content_Test2', author=author, post=post)
     return comment
-
-
-@pytest.fixture
-def create_category():
-    category = Category.objects.create(name="new")
-    return category

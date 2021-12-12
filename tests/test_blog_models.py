@@ -1,5 +1,5 @@
 from django.test import TestCase
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Photo, Youtube, Category
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -17,6 +17,15 @@ class BlogModelTest(TestCase):
                                               post=self.post)
         self.post.save()
         self.comment.save()
+
+        self.content = "test"
+        self.video = "https://www.youtube.com/watch?v=Geq60OVyBPg&t=8s"
+        self.youtube = Youtube.objects.create(content=self.content, video=self.video)
+
+        self.description = "Java"
+        self.category = Category.objects.create(name="Java");
+        self.image = "default.jpg"
+        self.photo = Photo.objects.create(description=self.description, category=self.category, image=self.image, author=self.author)
 
     # Test that post has title of type str
     def test_post_has_title(self):
@@ -70,3 +79,15 @@ class BlogModelTest(TestCase):
     # Test that comment has post
     def test_post_comment_is_post(self):
         self.assertEqual(self.comment.post, self.post)
+
+    # Test that photo has the same author
+    def test_photo_author_is_same_author(self):
+        self.assertEqual(self.photo.author, self.author)
+
+    # Test that youtube has the same youtube adress
+    def test_youtube_video_is_same_video(self):
+        self.assertEqual(self.youtube.video, self.video)
+
+    # Test that youtube has the same content
+    def test_youtube_content_is_same_content(self):
+        self.assertEqual(self.youtube.content, "test")

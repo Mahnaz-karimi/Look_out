@@ -10,9 +10,11 @@ import config.settings
 from django.shortcuts import redirect
 
 
-def videos(request):
-    obj = Youtube.objects.all()
-    return render(request, 'blog/youtube.html', {'obj': obj})
+class YoutubeListView(ListView):
+    model = Youtube
+    template_name = 'blog/youtube.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'youtubes'
+    paginate_by = config.settings.PAGINATION_COUNT
 
 
 class VideoCreateView(LoginRequiredMixin, CreateView):
