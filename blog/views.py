@@ -1,5 +1,4 @@
 from blog.models import Post, Comment, Photo, Youtube
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.views.generic import (
     ListView, CreateView, DeleteView, UpdateView, DetailView
