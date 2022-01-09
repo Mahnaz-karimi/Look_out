@@ -193,13 +193,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # Send a mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
 if os.path.exists('/etc/blog.json'):
     with open('/etc/blog.json') as config_file:
-        EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-        EMAIL_HOST = 'smtp.gmail.com'
-        EMAIL_PORT = 587
         EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
         EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
-        EMAIL_USE_TLS = True
-        EMAIL_USE_SSL = False
 
+else:
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
