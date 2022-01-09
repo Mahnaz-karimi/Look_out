@@ -190,3 +190,16 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 region_name = 'AWS_S3_REGION_NAME'
 AWS_S3_REGION_NAME = 'eu-central-1'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+
+# Send a mail
+if os.path.exists('/etc/blog.json'):
+    with open('/etc/blog.json') as config_file:
+        EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+        EMAIL_HOST = 'smtp.gmail.com'
+        EMAIL_PORT = 587
+        EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
+        EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
+        EMAIL_USE_TLS = True
+        EMAIL_USE_SSL = False
+

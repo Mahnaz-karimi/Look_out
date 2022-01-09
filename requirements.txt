@@ -32,6 +32,7 @@ jmespath==0.10.0
 lockfile==0.12.2
 mccabe==0.6.1
 msgpack==0.6.2
+numpy==1.22.0
 packaging==20.3
 pep517==0.8.2
 Pillow==8.1.2
@@ -60,3 +61,4 @@ toml==0.10.2
 urllib3==1.25.8
 webencodings==0.5.1
 whitenoise==5.2.0
+
