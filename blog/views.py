@@ -7,9 +7,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # mix in sikre os at user er logget ind
 import config.settings
 from django.shortcuts import redirect
-from django.core.mail import send_mail
-from django.conf import settings
-import numpy as np
 
 
 class YoutubeListView(ListView):
@@ -104,15 +101,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):  # tilføje logind-brugeren som author in i post
         form.instance.author = self.request.user  # adder den aktuelle user til formen
-        # get list of users email and using loop send mail. Here can use title of post for information on mail
-        send_mail('Hello from Mahnaz', 'Hello there. this is an automate message. There are som new post', settings.EMAIL_HOST_USER, ['mahnaaz85@gmail.com'], fail_silently=False)
         return super().form_valid(form)
-
-
-def getUsers():
-    users = User.objects.all()
-    for i in np.arange(len(users)):
-        print(users[i])
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # Mixin bruges til sikre og skal stå først
