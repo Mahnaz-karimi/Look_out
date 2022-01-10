@@ -9,10 +9,9 @@ from django.conf import settings
 @receiver(post_save, sender=Post)
 def notify_users(sender, instance, created, **kwargs):
     if created:
-        print("theere is created")
         users = User.objects.all()
         for user in users:
             send_mail('Hello from Mahnaz', 'Hello there. this is an automate message. There are som new post',
                       settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
-
+    print("New posts is created")
