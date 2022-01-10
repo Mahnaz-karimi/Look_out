@@ -196,6 +196,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'mahnaaz2021@gmail.com'
+SERVER_EMAIL = 'mahnaaz2021@gmail.com'
 if os.path.exists('/etc/blog.json'):
     with open('/etc/blog.json') as config_file:
         EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
