@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from blog.models import Post
 from django.core.mail import send_mail
 from django.conf import settings
+import os
 
 
 @receiver(post_save, sender=Post)
@@ -15,3 +16,6 @@ def notify_users(sender, instance, created, **kwargs):
                       settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
     print("New posts is created")
+    a = os.environ.get('EMAIL_HOST_USER')
+    b = os.environ.get('EMAIL_HOST_PASSWORD')
+    print('this is a user mail: ', a, 'this is a user mail: ', b)
