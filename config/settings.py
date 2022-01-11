@@ -15,12 +15,14 @@ from pathlib import Path
 import django_heroku
 import dj_database_url
 
+
+# Send a mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_USE_TLS = True
 
-if os.path.exists('/etc/blog.json'):
+
+if os.path.exists('/etc/blog.json'):  # less data from json file
     with open('/etc/blog.json') as config_file:
         config = json.load(config_file)
         SECRET_KEY = config.get('SECRET_KEY')
@@ -31,6 +33,8 @@ if os.path.exists('/etc/blog.json'):
         ALLOWED_HOSTS = config.get('ALLOWED_HOSTS')
         EMAIL_HOST_USER = config.get('EMAIL_USER')
         EMAIL_HOST_PASSWORD = config.get('EMAIL_PASS')
+        EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
+        EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
         DATABASES = {
             'default': {
                 'ENGINE': config.get('DB_ENGINE'),
@@ -50,6 +54,8 @@ else:
     ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
     EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
     DATABASES = {}
     if 'DYNO' in os.environ:  # Dette sker kun på Heroku, hvis man er på heroku så skal dette settes op
         DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
@@ -191,20 +197,6 @@ region_name = 'AWS_S3_REGION_NAME'
 AWS_S3_REGION_NAME = 'eu-central-1'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-
-# Send a mail
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-
-if os.path.exists('/etc/blog.json'):
-    with open('/etc/blog.json') as config_file:
-        EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
-        EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
-
-else:
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-
+# send mail
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
