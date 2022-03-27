@@ -1,12 +1,39 @@
-from blog.models import Post, Comment, Photo, Youtube
+from blog.models import Post, Comment, Photo, Youtube, Images
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 from django.views.generic import (
-    ListView, CreateView, DeleteView, UpdateView, DetailView
+    ListView, CreateView, DeleteView, UpdateView, DetailView, TemplateView
 )
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # mix in sikre os at user er logget ind
 import config.settings
 from django.shortcuts import redirect
+
+
+# Photos detail
+class PhotoAlbumDetailView(TemplateView):
+    template_name = "blog/album_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['photodetail'] = Photo.objects.get(id=self.kwargs['pk'])
+        return context
+
+
+# add images to album
+class AddPhotoAlbumView(TemplateView):
+    template_name = "blog/add_photo_album.html"
+    success_url = reverse_lazy('blog:blog-home')
+
+    def post(self, request, *args, **kwargs):
+        try:
+            images = request.FILES.getlist('images')
+            photo = Photo.objects.get(id=self.kwargs['pk'])
+            for image in images:
+                Images.objects.create(author=self.request.user, photo=photo, images=image)
+            return redirect('blog:blog-home')
+        except():
+            return redirect('blog:post-new')
 
 
 class YoutubeListView(ListView):
@@ -49,7 +76,6 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
         if request.method == 'POST':
             try:
                 description = request.POST['description']
-
                 images = request.FILES.getlist('images')
                 for image in images:
                     Photo.objects.create(image=image, description=description,

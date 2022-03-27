@@ -16,6 +16,9 @@ from blog.views import (
     PostDetailView,
     VideoCreateView,
     YoutubeListView,
+    PhotoAlbumDetailView,
+    AddPhotoAlbumView,
+
 )
 
 app_name = 'blog'
@@ -24,6 +27,8 @@ urlpatterns = [
     path('photo/update/<int:pk>/', PhotoUpdateView.as_view(), name='photo-update'),
     path('photo/delete/<int:pk>/', PhotoDeleteView.as_view(), name='photo-delete'),
     path('photo/new/', login_required(PhotoCreateView.as_view()), name='photo-new'),
+    path('photo/album/details/<int:pk>/', PhotoAlbumDetailView.as_view(), name="album-detail"),
+    path('photo/album/addimage/<int:pk>/', AddPhotoAlbumView.as_view(), name="add-image-album"),
 
     path('posts/', PostListView.as_view(), name='post-view'),
     path('posts/detail/<int:pk>/', PostDetailView.as_view(), name='post-detail-view'),

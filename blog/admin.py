@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Post, Comment, Photo, Youtube, Category
+from blog.models import Post, Comment, Photo, Youtube, Category, Images
 from embed_video.admin import AdminVideoMixin
 
 
@@ -12,6 +12,7 @@ admin.site.register(Post, AuthorAdmin)
 admin.site.register(Comment)
 admin.site.register(Photo)
 admin.site.register(Category)
+admin.site.register(Images)
 
 
 class MyModelAdmin(AdminVideoMixin, admin.ModelAdmin):

@@ -46,6 +46,12 @@ class Photo(models.Model):
         return reverse('blog:blog-home')  # reverse vil return the full path as a string url pattern
 
 
+class Images(models.Model):
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE, null=True, blank=True)
+    images = models.FileField(null=True, upload_to="album/%Y/%m/%d")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
+
 class Comment(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
