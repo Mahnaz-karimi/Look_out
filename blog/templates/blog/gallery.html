@@ -53,14 +53,23 @@
 
                             <div class="card-body">
                                 <small>Beskrivelse: {{photo.description}}</small>
-
                             </div>
 
+                            {% if request.user.is_authenticated %}
+                                <div class="card">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                        </li>
+                                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:add-image-album' photo.id %}">Add images</a>
+                                        </ul>
+                                </div>
+                            {% endif %}
+
+                            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:album-detail' photo.id %}">Detail</a>
                             {% if photo.author == user %} <!-- man kan access user hver html side -->
                                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:photo-update' photo.id %}">Ændrer media</a>
                                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:photo-delete' photo.id %}">Delete media</a>
-                                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:album-detail' photo.id %}">Detail</a>
-                                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:add-image-album' photo.id %}">Add images</a>
+
                             {% endif %}
                         </div>
                     </div>

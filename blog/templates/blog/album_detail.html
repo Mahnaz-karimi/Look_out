@@ -1,15 +1,13 @@
 {% extends "blog/base.html" %}
 {% block content %}
-<h1 class="mb-3">Alle Photo Album</h1>
+<h1 class="mb-3">Alle Photo Album fra: {{photodetail.description}}</h1>
 <div class="container my-5">
-    <h1>Product detail</h1>
-    <br />
-    <hr />
-    <h4>Beskrivelse: {{photodetail.description}}</h4>
+
     <h4>Kategory: {{photodetail.category}}</h4>
     <br />
     {% for pimage in photodetail.images_set.all %}
-    <img src="{{pimage.images.url}}" class="card-img-top" alt="..." style="width: 200px; height: 200px;">
+    <img src="{{pimage.images.url}}" class="card-img-top" alt="..." style="width: 300px; height: 300px;">
+        <div class="container my-4"> </div>
     {% empty %}
     <p>No images yet </p>
     {% endfor %}
