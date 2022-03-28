@@ -2,7 +2,7 @@ from django import forms
 from blog.models import Images
 
 
-class ProductForm(forms.ModelForm):
+class ImagesForm(forms.ModelForm):
     class Meta:
         model = Images
         fields = '__all__'
