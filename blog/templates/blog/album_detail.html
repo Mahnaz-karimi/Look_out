@@ -4,13 +4,18 @@
 <div class="container my-5">
 
     <h4>Kategory: {{photodetail.category}}</h4>
-    <br />
     {% for pimage in photodetail.images_set.all %}
+<div class="container my-5">
     <img src="{{pimage.images.url}}" class="card-img-top" alt="..." style="width: 300px; height: 300px;">
-        <div class="container my-4"> </div>
+    {% if pimage.author == user %}
+        <div class="container my-1">
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:photo-album-delete' pimage.id %}">Delete</a>
+        </div></div>
+    {% endif %}
+
     {% empty %}
     <p>No images yet </p>
     {% endfor %}
-    
+
 </div>
 {% endblock content %}

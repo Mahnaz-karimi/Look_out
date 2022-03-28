@@ -21,7 +21,7 @@ class PhotoAlbumDetailView(TemplateView):
 
 
 # add images to album
-class AddPhotoAlbumView(TemplateView):
+class PhotoAlbumCreateView(LoginRequiredMixin, CreateView):
     template_name = "blog/add_photo_album.html"
     success_url = reverse_lazy('blog:blog-home')
 
@@ -34,6 +34,19 @@ class AddPhotoAlbumView(TemplateView):
             return redirect('blog:blog-home')
         except():
             return redirect('blog:post-new')
+
+
+# delete image of album
+class ImageAlbumDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Images
+    success_url = reverse_lazy('blog:blog-home')  # efter delete a image af albume så vil redirect brugeren til home side
+    template_name = "blog/album_delete_photo.html"
+
+    def test_func(self):
+        image = self.get_object()
+        if self.request.user == image.author:
+            return True
+        return False
 
 
 class YoutubeListView(ListView):

@@ -47,6 +47,7 @@ class Photo(models.Model):
 
 
 class Images(models.Model):
+    description = models.TextField( null=True, blank=True)
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE, null=True, blank=True)
     images = models.FileField(null=True, upload_to="album/%Y/%m/%d")
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)

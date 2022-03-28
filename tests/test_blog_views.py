@@ -1,7 +1,7 @@
 from django import urls
 import pytest
 from django.contrib.auth.models import User
-from blog.models import Post, Comment, Photo, Youtube
+from blog.models import Post, Comment, Photo, Youtube, Images
 
 
 url_data = [
@@ -57,6 +57,32 @@ def test_PhotoDeleteView(client, user_data_for_login, create_user_for_login, pho
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     photo = Photo.objects.latest('pk')
     user_url = urls.reverse('blog:photo-delete', kwargs={'pk': photo.id})
+    resp = client.post(user_url)
+    assert resp.status_code == 302
+    assert resp.url == urls.reverse('blog:blog-home')
+
+
+@pytest.mark.django_db
+def test_Photo_Album_CreateView(client, user_data_for_login, create_user_for_login, photo_data):
+    test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind fordi i youtube.html
+    photo = Photo.objects.latest('pk')
+    user_url = urls.reverse('blog:add-image-album', kwargs={'pk': photo.pk})
+    resp = client.post(user_url, {
+        'photo': photo,
+        'description': 'title',
+        'images': 'default.jpg',
+        'author': create_user_for_login
+    })
+    print("print form : ", str(resp))
+    assert resp.status_code == 302  # redirect to home view efter at oprette en photo
+    assert resp.url == urls.reverse('blog:blog-home')  # Efter create a image for album, redirectes til home page
+
+
+@pytest.mark.django_db
+def test_ImageAlbumDeleteView(client, user_data_for_login, create_user_for_login, data_for_image_album):
+    test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
+    imageAlbum = Images.objects.latest('pk')
+    user_url = urls.reverse('blog:photo-album-delete', kwargs={'pk': imageAlbum.id})
     resp = client.post(user_url)
     assert resp.status_code == 302
     assert resp.url == urls.reverse('blog:blog-home')

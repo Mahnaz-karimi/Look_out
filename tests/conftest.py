@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth import get_user_model
-from blog.models import Post, Comment, Photo, Category, Youtube
+from blog.models import Post, Comment, Photo, Category, Youtube, Images
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -38,6 +38,15 @@ def data_for_youtube():
         'content': 'test',
         'video': 'https://www.youtube.com/watch?v=Geq60OVyBPg&t=8s'
     }
+
+
+@pytest.fixture
+def data_for_image_album():
+    author = User.objects.latest('pk')
+    category = Category.objects.create(name="Ny")
+    photo = Photo.objects.create(author=author, image='default.jpg', description='test', category=category)
+    image = Images.objects.create(description='test', photo=photo, images='default.jpg', author=author)
+    return image
 
 
 @pytest.fixture
