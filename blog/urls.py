@@ -17,7 +17,7 @@ from blog.views import (
     VideoCreateView,
     YoutubeListView,
     PhotoAlbumDetailView,
-    PhotoAlbumCreateView,
+    AddImage_AlbumView,
     ImageAlbumDeleteView,
 
 )
@@ -29,7 +29,7 @@ urlpatterns = [
     path('photo/delete/<int:pk>/', PhotoDeleteView.as_view(), name='photo-delete'),
     path('photo/new/', login_required(PhotoCreateView.as_view()), name='photo-new'),
     path('photo/album/details/<int:pk>/', PhotoAlbumDetailView.as_view(), name="album-detail"),
-    path('photo/album/addimage/<int:pk>/', PhotoAlbumCreateView.as_view(), name="add-image-album"),
+    path('photo/album/addimage/<int:pk>/', AddImage_AlbumView.as_view(), name="add-image-album"),
     path('photo/album/delete/<int:pk>/', ImageAlbumDeleteView.as_view(), name='photo-album-delete'),
 
 

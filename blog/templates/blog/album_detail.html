@@ -10,9 +10,10 @@
     {% if pimage.author == user %}
         <div class="container my-1">
         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:photo-album-delete' pimage.id %}">Delete</a>
-        </div></div>
-    {% endif %}
+        </div>
 
+    {% endif %}
+</div>
     {% empty %}
     <p>No images yet </p>
     {% endfor %}

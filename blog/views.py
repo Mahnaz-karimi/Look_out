@@ -21,7 +21,7 @@ class PhotoAlbumDetailView(TemplateView):
 
 
 # add images to album
-class PhotoAlbumCreateView(LoginRequiredMixin, CreateView):
+class AddImage_AlbumView(LoginRequiredMixin, TemplateView):
     template_name = "blog/add_photo_album.html"
     success_url = reverse_lazy('blog:blog-home')
 
