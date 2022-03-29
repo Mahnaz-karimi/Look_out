@@ -1,4 +1,4 @@
-###  This is a Web application written by i.a. Python, Django and Bootstrap, automated testing and CI/CD with GitHub actions, which I used pytest for test scripts. this project is been integratet and deployed for both a test environment and a production environment on Heroku cloud platform, used Postgresql as Database tecnology, used Amazon Web Services, AWS, for file storage.
+###  This is a Web application using i.a. Python, Django, Bootstrap and CI/CD with GitHub actions, which I used pytest to test the scripts. This project has been  automated testing, integratet and deployed for a test environment and a production environment on Heroku cloud platform, used Postgresql as Database tecnology, used Amazon Web Services, AWS, for file storage.
 
 # Demo
 
