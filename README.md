@@ -4,37 +4,7 @@
 
 ![image](https://user-images.githubusercontent.com/72239384/160517033-2d92de62-7b06-4d83-b79a-59bb513c150e.png)
 
-### To run the project
 
-```
-python3 manage.py runserver
-```
-
-### To change or access to the heroku app
-
-```
-heroku git:remote -a app-name
-```
-
-### To deploy the project to the heroku websites via different branches
-
-```
-git push heroku master
-```
-```
-git push heroku branch-name:master    
-```
-### To integration the project to the heroku 
-```
-heroku run python manage.py migrate
-```
-```
-heroku run python manage.py collectstatic
-```
-### To overwrite existing static files or write static files
-```
-python3 manage.py collectstatic
-```
 ### How To Setup
 ```
 git clone https://github.com/Mahnaz-karimi/Look_out.git
@@ -63,6 +33,35 @@ python manage.py createsuperuser
 ```
 python manage.py runserver
 ```
+
+### To overwrite existing static files or write static files
+```
+python3 manage.py collectstatic
+```
+
+### To change or access to the heroku app
+
+```
+heroku git:remote -a app-name
+```
+
+### To deploy the project to the heroku websites via different branches
+
+```
+git push heroku master
+```
+```
+git push heroku branch-name:master    
+```
+### To integration the project to the heroku 
+```
+heroku run python manage.py migrate
+```
+```
+heroku run python manage.py collectstatic
+```
+
+
   
 
   
