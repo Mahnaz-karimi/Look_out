@@ -35,7 +35,34 @@ heroku run python manage.py collectstatic
 ```
 python3 manage.py collectstatic
 ```
-
+### How To Setup
+```
+git clone https://github.com/Mahnaz-karimi/Look_out.git
+```
+```
+cd Look_out
+```
+```
+python3 -m venv venv
+```
+```
+source venv/bin/activate
+```
+```
+pip install -r requirements.txt
+```
+```
+python manage.py makemigrations
+```
+```
+python manage.py migrate
+```
+```
+python manage.py createsuperuser
+```
+```
+python manage.py runserver
+```
   
 
   
