@@ -8,9 +8,7 @@
 
 ```
 python3 manage.py runserver
-
 ```
-
 
 ### To change of heroku websites
 
