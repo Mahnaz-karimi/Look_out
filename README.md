@@ -10,7 +10,7 @@
 python3 manage.py runserver
 ```
 
-### To change of heroku websites
+### To change or access to the heroku app
 
 ```
 heroku git:remote -a app-name
@@ -24,13 +24,13 @@ git push heroku master
 ```
 git push heroku branch-name:master    
 ```
+### To integration the project to the heroku 
 ```
 heroku run python manage.py migrate
 ```
 ```
 heroku run python manage.py collectstatic
 ```
-
 ### To overwrite existing static files or write static files
 ```
 python3 manage.py collectstatic
