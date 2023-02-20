@@ -22,8 +22,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 
 
-if os.path.exists('/etc/blog.json'):  # less data from json file
-    with open('/etc/blog.json') as config_file:
+if os.path.exists('C:/json/blog/config.json'):  # less data from json file
+    with open('C:/json/blog/config.json') as config_file:
         config = json.load(config_file)
         SECRET_KEY = config.get('SECRET_KEY')
         AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID')
@@ -31,8 +31,8 @@ if os.path.exists('/etc/blog.json'):  # less data from json file
         AWS_STORAGE_BUCKET_NAME = config.get('AWS_STORAGE_BUCKET_NAME')
         DEBUG = (config.get('DEBUG_VALUE') == 'True')
         ALLOWED_HOSTS = config.get('ALLOWED_HOSTS')
-        EMAIL_HOST_USER = config.get('EMAIL_USER')
-        EMAIL_HOST_PASSWORD = config.get('EMAIL_PASS')
+        EMAIL_USER = config.get('EMAIL_USER')
+        EMAIL_PASSWORD = config.get('EMAIL_PASS')
         EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
         EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
         DATABASES = {
@@ -182,8 +182,8 @@ PAGINATION_COUNT = 12
 
 
 FEATURES = {}
-if os.path.exists('/etc/features.json'):
-    with open('/etc/features.json') as feature_file:
+if os.path.exists('C:/json/blog/features.json'):
+    with open('C:/json/blog/features.json') as feature_file:
         FEATURES = json.load(feature_file)
 elif 'FEATURES' in os.environ:
     FEATURES = json.loads(os.environ.get('FEATURES'))
