@@ -14,8 +14,9 @@ from blog.views import (
     PhotoDeleteView,
     PostCreateView,
     PostDetailView,
-    VideoCreateView,
+    YoutubeCreateView,
     YoutubeListView,
+    YoutubeDeleteView,
     PhotoAlbumDetailView,
     AddImage_AlbumView,
     ImageAlbumDeleteView,
@@ -45,5 +46,7 @@ urlpatterns = [
     path('delete/comments/<int:pk>/', CommentDeleteView.as_view(), name='comment-delete'),
 
     path('youtube/videos', YoutubeListView.as_view(), name='youtube-videos'),
-    path('video/new/', login_required(VideoCreateView.as_view()), name='video-new'),
+    path('youtube/new/', login_required(YoutubeCreateView.as_view()), name='youtube-new'),
+    path('youtube/delete/<int:pk>/', login_required(YoutubeDeleteView.as_view()), name='youtube-delete'),
 ]
+

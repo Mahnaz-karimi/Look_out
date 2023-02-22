@@ -60,7 +60,10 @@ heroku run python manage.py migrate
 ```
 heroku run python manage.py collectstatic
 ```
-
+#### From CLI run the comando to find out if any database resources are deleted
+```
+heroku releases -a <app-name> 
+```
 
   
 

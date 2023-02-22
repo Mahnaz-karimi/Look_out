@@ -39,7 +39,8 @@ class AddImage_AlbumView(LoginRequiredMixin, TemplateView):
 # delete image of album
 class ImageAlbumDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Images
-    success_url = reverse_lazy('blog:blog-home')  # efter delete a image af albume så vil redirect brugeren til home side
+    success_url = reverse_lazy(
+        'blog:blog-home')  # efter delete a image af albume så vil redirect brugeren til home side
     template_name = "blog/album_delete_photo.html"
 
     def test_func(self):
@@ -56,15 +57,26 @@ class YoutubeListView(ListView):
     paginate_by = config.settings.PAGINATION_COUNT
 
 
-class VideoCreateView(LoginRequiredMixin, CreateView):
+class YoutubeCreateView(LoginRequiredMixin, CreateView):
     model = Youtube
     fields = ['content', 'video']
-    template_name = 'blog/video_form.html'
+    template_name = 'blog/youtube_form.html'
     success_url = '/blog/youtube/videos'
 
     def form_valid(self, form):  # tilføje logind-brugeren som author in i post
         form.instance.author = self.request.user  # adder den aktuelle user til formen
         return super().form_valid(form)
+
+
+class YoutubeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Youtube
+    success_url = '/blog/youtube/videos'  # efter delete a object så vil redirect to the url
+
+    def test_func(self):
+        Youtube = self.get_object()
+        if self.request.user == Youtube.author:
+            return True
+        return False
 
 
 class PhotoListView(ListView):
@@ -227,4 +239,3 @@ class UserPostListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('date_posted')
-

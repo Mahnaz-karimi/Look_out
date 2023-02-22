@@ -176,7 +176,7 @@ def test_UserPostListView(client, create_user_for_login):
 @pytest.mark.django_db
 def test_youtube_CreateView(client, user_data_for_login, create_user_for_login, data_for_youtube):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind fordi i youtube.html
-    user_url = urls.reverse('blog:video-new')
+    user_url = urls.reverse('blog:youtube-new')
     resp = client.post(user_url, data=data_for_youtube)
     print("print form : ", str(resp))
     assert resp.status_code == 302  # redirect to home view efter at oprette en photo

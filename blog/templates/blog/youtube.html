@@ -23,7 +23,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                     </li>
-                    <a href="{% url 'blog:video-new' %}" class="btn btn-dark btn-block btn-sm m-1">Add Video</a>
+                    <a href="{% url 'blog:youtube-new' %}" class="btn btn-dark btn-block btn-sm m-1">Add Video</a>
                 </ul>
             </div>
         {% endif %}
@@ -34,9 +34,13 @@
    <div class="row">
         <div class="col-md-4">
             <div class="card my-2">
-                {%  for i in youtubes %}
-            {% video i.video 'small' %}
-            {{i.content}}
+                {%  for youtube in youtubes %}
+                    {% video youtube.video 'small' %}
+                    {{youtube.content}}
+                    {% if youtube.author == user %} <!-- man kan access user hver html side -->
+                     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'blog:youtube-delete' youtube.id %}">Delete youtube</a>
+
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

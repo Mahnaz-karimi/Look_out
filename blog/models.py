@@ -67,7 +67,10 @@ class Comment(models.Model):
 class Youtube(models.Model):
     content = models.TextField(default="Videos")
     video = EmbedVideoField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)  # on_delete gøre at hvis en bruger bliver slettet
 
+    # så vil posten bliver også slettet. Den sker gennem Cascade med store bogstaver
     def __str__(self):
         return self.content
 
