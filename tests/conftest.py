@@ -22,8 +22,7 @@ def user_data_for_register():
 def data_for_create_photo():
     return {
         'image': 'default.jpg',
-        'description': 'pictures',
-
+        'description': 'pictures'
     }
 
 
@@ -33,10 +32,12 @@ def user_data_for_login():
 
 
 @pytest.fixture
-def data_for_youtube():
+def data_youtube():
+    author = User.objects.latest('pk')
     return {
         'content': 'test',
-        'video': 'https://www.youtube.com/watch?v=Geq60OVyBPg&t=8s'
+        'video': 'https://www.youtube.com/watch?v=Geq60OVyBPg&t=8s',
+        'author': author
     }
 
 

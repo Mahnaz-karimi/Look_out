@@ -13,6 +13,7 @@ from django.shortcuts import redirect
 # Photos detail
 class PhotoAlbumDetailView(TemplateView):
     template_name = "blog/album_detail.html"
+    paginate_by = config.settings.PAGINATION_COUNT
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

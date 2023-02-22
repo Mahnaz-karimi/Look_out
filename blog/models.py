@@ -20,6 +20,7 @@ class Post(models.Model):
     #  on_delete gøre at hvis en bruger bliver slettet så vil posten bliver også slettet. Den gøres med Cascade
     #  med store bogstaver
     likes = models.PositiveIntegerField(default=0)
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
@@ -33,11 +34,13 @@ class Photo(models.Model):
     class Meta:
         verbose_name = 'Photo'
         verbose_name_plural = 'Photos'
+        ordering = ['-date_posted']
 
     image = models.FileField(null=False, blank=False, upload_to='profile_pics/%Y/%m/%d')
     description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # Post bliver forbundet med user med foreignkey.
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, blank=True)
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.description
@@ -51,6 +54,8 @@ class Images(models.Model):
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE, null=True, blank=True)
     images = models.FileField(null=True, upload_to="album/%Y/%m/%d")
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    #  med store bogstaver
+    date_posted = models.DateTimeField(default=timezone.now)
 
 
 class Comment(models.Model):
@@ -65,7 +70,9 @@ class Comment(models.Model):
 
 
 class Youtube(models.Model):
-    content = models.TextField(default="Videos")
+    class Meta:
+        ordering = ['-date_posted']
+    content = models.TextField(default="Youtube video")
     video = EmbedVideoField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)  # on_delete gøre at hvis en bruger bliver slettet
