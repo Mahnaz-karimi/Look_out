@@ -32,13 +32,18 @@ def user_data_for_login():
 
 
 @pytest.fixture
-def data_youtube():
-    author = User.objects.latest('pk')
+def data_for_youtube():
     return {
         'content': 'test',
-        'video': 'https://www.youtube.com/watch?v=Geq60OVyBPg&t=8s',
-        'author': author
+        'video': 'https://www.youtube.com/watch?v=Geq60OVyBPg&t=8s'
     }
+
+
+@pytest.fixture
+def data_youtube():
+    author = User.objects.latest('pk')
+    youtube = Youtube.objects.create(content='test', video='https://www.youtube.com/watch?v=Geq60OVyBPg&t=8s', author=author)
+    return youtube
 
 
 @pytest.fixture
