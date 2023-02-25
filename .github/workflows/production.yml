@@ -63,9 +63,9 @@ jobs:
         flake8 person --count --select=E9,F4,F6,F8 --show-source --statistics        
     - name: Deploy to Heroku
       env:
-        PRODUCTION_HEROKU_API_TOKEN: ${{ secrets.PRODUCTION_HEROKU_API_TOKEN }}
-        PRODUCTION_HEROKU_APP_NAME: ${{ secrets.PRODUCTION_HEROKU_APP_NAME }}
+        PRODUCTION_HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+        PRODUCTION_HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       if: github.ref == 'refs/heads/master' && job.status == 'success'
       run: |
-        git remote add heroku https://heroku:$PRODUCTION_HEROKU_API_TOKEN@git.heroku.com/$PRODUCTION_HEROKU_APP_NAME.git
+        git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
         git push heroku HEAD:master -f

@@ -27,7 +27,7 @@ def test_user_login(client, user_data_for_login, create_user_for_login):
 
 
 @pytest.mark.django_db
-def test_PhotoCreateView(client, user_data_for_login, create_user_for_login, data_for_create_photo):
+def test_photo_create_view(client, user_data_for_login, create_user_for_login, data_for_create_photo):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     user_url = urls.reverse('blog:photo-new')
     resp = client.post(user_url, data=data_for_create_photo)
@@ -37,7 +37,7 @@ def test_PhotoCreateView(client, user_data_for_login, create_user_for_login, dat
 
 
 @pytest.mark.django_db
-def test_PhotoUpdateView(client, user_data_for_login, create_user_for_login, photo_data):
+def test_photo_update_view(client, user_data_for_login, create_user_for_login, photo_data):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     photo = Photo.objects.latest('pk')
     user_url = urls.reverse('blog:photo-update', kwargs={'pk': photo.pk})
@@ -53,8 +53,9 @@ def test_PhotoUpdateView(client, user_data_for_login, create_user_for_login, pho
 
 
 @pytest.mark.django_db
-def test_PhotoDeleteView(client, user_data_for_login, create_user_for_login, photo_data):
+def test_photo_delete_view(client, user_data_for_login, create_user_for_login, photo_data):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
+    print("data for foto", photo_data)
     photo = Photo.objects.latest('pk')
     user_url = urls.reverse('blog:photo-delete', kwargs={'pk': photo.id})
     resp = client.post(user_url)
@@ -63,7 +64,7 @@ def test_PhotoDeleteView(client, user_data_for_login, create_user_for_login, pho
 
 
 @pytest.mark.django_db
-def test_Photo_Album_CreateView(client, user_data_for_login, create_user_for_login, photo_data):
+def test_photo_album_create_view(client, user_data_for_login, create_user_for_login, photo_data):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind fordi i youtube.html
     photo = Photo.objects.latest('pk')
     user_url = urls.reverse('blog:add-image-album', kwargs={'pk': photo.pk})
@@ -79,7 +80,7 @@ def test_Photo_Album_CreateView(client, user_data_for_login, create_user_for_log
 
 
 @pytest.mark.django_db
-def test_ImageAlbumDeleteView(client, user_data_for_login, create_user_for_login, data_for_image_album):
+def test_image_album_delete_view(client, user_data_for_login, create_user_for_login, data_for_image_album):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     imageAlbum = Images.objects.latest('pk')
     user_url = urls.reverse('blog:photo-album-delete', kwargs={'pk': imageAlbum.id})
@@ -89,7 +90,7 @@ def test_ImageAlbumDeleteView(client, user_data_for_login, create_user_for_login
 
 
 @pytest.mark.django_db
-def test_PostCreateView(client, user_data_for_login, create_user_for_login):
+def test_post_create_view(client, user_data_for_login, create_user_for_login):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     user_url = urls.reverse('blog:post-new')
     resp = client.post(user_url, {         # en client får fat i den user-url og derefter sender de data med post method
@@ -102,7 +103,7 @@ def test_PostCreateView(client, user_data_for_login, create_user_for_login):
 
 
 @pytest.mark.django_db
-def test_PostUpdateView(client, user_data_for_login, create_user_for_login, post_data):
+def test_post_update_view(client, user_data_for_login, create_user_for_login, post_data):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     post = Post.objects.latest('pk')
     user_url = urls.reverse('blog:post-update', kwargs={'pk': post.pk})  # Se comment under en post
@@ -115,7 +116,7 @@ def test_PostUpdateView(client, user_data_for_login, create_user_for_login, post
 
 
 @pytest.mark.django_db
-def test_Post_Delete_View(client, user_data_for_login, create_user_for_login, post_data):
+def test_post_delete_view(client, user_data_for_login, create_user_for_login, post_data):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     post = Post.objects.latest('pk')
     user_url = urls.reverse('blog:post-delete', kwargs={'pk': post.id})
@@ -125,7 +126,7 @@ def test_Post_Delete_View(client, user_data_for_login, create_user_for_login, po
 
 
 @pytest.mark.django_db
-def test_CommentNewPostCreateView(client, user_data_for_login, create_user_for_login, post_data):
+def test_comment_new_post_create_view(client, user_data_for_login, create_user_for_login, post_data):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     post = Post.objects.latest('pk')
     user_url = urls.reverse('blog:comment-new', kwargs={'id': post.id})
@@ -137,7 +138,7 @@ def test_CommentNewPostCreateView(client, user_data_for_login, create_user_for_l
 
 
 @pytest.mark.django_db
-def test_CommentDeleteView(client, user_data_for_login, create_user_for_login, comment_data):
+def test_comment_delete_view(client, user_data_for_login, create_user_for_login, comment_data):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     comment = Comment.objects.latest('pk')
     user_url = urls.reverse('blog:comment-delete', kwargs={'pk': comment.id})
@@ -147,7 +148,7 @@ def test_CommentDeleteView(client, user_data_for_login, create_user_for_login, c
 
 
 @pytest.mark.django_db
-def test_CommentDeleteViewWithOtherUser(client, user_data_for_login, create_user_for_login, comment_data2):
+def test_comment_delete_view_with_other_user(client, user_data_for_login, create_user_for_login, comment_data2):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     comment = Comment.objects.latest('pk')
     user_url = urls.reverse('blog:comment-delete', kwargs={'pk': comment.id})
@@ -156,7 +157,7 @@ def test_CommentDeleteViewWithOtherUser(client, user_data_for_login, create_user
 
 
 @pytest.mark.django_db
-def test_PostCommentsView(client, create_user_for_login, post_data):
+def test_post_comments_view(client, create_user_for_login, post_data):
     post = Post.objects.latest('pk')
     user_url = urls.reverse('blog:post-comments', kwargs={'id': post.id})  # Se komments under en post
     resp = client.get(user_url)
@@ -165,7 +166,7 @@ def test_PostCommentsView(client, create_user_for_login, post_data):
 
 
 @pytest.mark.django_db
-def test_UserPostListView(client, create_user_for_login):
+def test_user_post_list_view(client, create_user_for_login):
     user = User.objects.latest('pk')
     user_url = urls.reverse('blog:user-posts', kwargs={'username': user.username})  # Se post under en user
     resp = client.get(user_url)
@@ -174,7 +175,7 @@ def test_UserPostListView(client, create_user_for_login):
 
 
 @pytest.mark.django_db
-def test_youtube_CreateView(client, user_data_for_login, create_user_for_login, data_for_youtube):
+def test_youtube_create_view(client, user_data_for_login, create_user_for_login, data_for_youtube):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind fordi i youtube.html
     user_url = urls.reverse('blog:youtube-new')
     resp = client.post(user_url, data=data_for_youtube)
@@ -184,7 +185,7 @@ def test_youtube_CreateView(client, user_data_for_login, create_user_for_login, 
 
 
 @pytest.mark.django_db
-def test_Youtube_DeleteView(client, user_data_for_login, create_user_for_login, data_youtube):
+def test_youtube_delete_view(client, user_data_for_login, create_user_for_login, data_youtube):
     test_user_login(client, user_data_for_login, create_user_for_login)  # Her logger vi ind
     youtube = Youtube.objects.latest('pk')
     user_url = urls.reverse('blog:youtube-delete', kwargs={'pk': youtube.id})
