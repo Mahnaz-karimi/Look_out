@@ -62,7 +62,7 @@ jobs:
       run: python3 manage.py migrate
     - name: Run pytest
       run: |
-        python -m pytest
+        pytest
     - name: Lint with flake8
       run: |
         # dont stop the build if there are syntax errors in post
