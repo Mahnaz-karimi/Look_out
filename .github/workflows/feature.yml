@@ -54,15 +54,22 @@ jobs:
         pip install boto3
         pip uninstall apipkg
         pip install apipkg
+        pip uninstall awscli
         pip install awscli 
         pip uninstall django
         pip install django
+        pip uninstall botocore
+        pip install botocore
+        pip uninstall pytest
+        pip install pytest
+        pip uninstall py
+        pip install py
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run migrations
       run: python3 manage.py migrate
     - name: Run pytest
       run: |
-        pytest
+        python -m pytest
     - name: Lint with flake8
       run: |
         # dont stop the build if there are syntax errors in post
