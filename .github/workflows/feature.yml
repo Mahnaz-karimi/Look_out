@@ -59,6 +59,7 @@ jobs:
         pip install awscli 
         pip uninstall django
         pip uninstall py
+        if [ -f requirements.txt ]; then pip uninstall -r requirements.txt; fi
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run migrations
       run: python manage.py migrate
