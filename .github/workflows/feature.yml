@@ -50,7 +50,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip uninstall django-embed-video
-        pip install django-embed-video
         pip uninstall pytest
         pip install pytest
         pip install flake8 pytest
