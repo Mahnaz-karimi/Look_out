@@ -51,8 +51,6 @@ jobs:
         python -m pip install --upgrade pip
         pip uninstall django-embed-video
         pip uninstall pytest
-        pip install pytest
-        pip install flake8 pytest
         pip uninstall boto3
         pip install boto3
         pip uninstall apipkg
@@ -60,9 +58,7 @@ jobs:
         pip uninstall awscli
         pip install awscli 
         pip uninstall django
-        pip install django
         pip uninstall py
-        pip install py
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run migrations
       run: python manage.py migrate
