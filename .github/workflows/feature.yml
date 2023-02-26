@@ -48,15 +48,7 @@ jobs:
         python-version: 3.9
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip --user
-        pip uninstall django-embed-video
-        pip uninstall pytest
-        pip uninstall boto3
-        pip uninstall apipkg
-        pip uninstall awscli
-        pip uninstall django
-        pip uninstall py
-        pip uninstall pytest-asyncio
+        python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run migrations
       run: python manage.py migrate
