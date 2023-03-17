@@ -72,6 +72,16 @@ def post_data():
 
 
 @pytest.fixture
+def search_fixture(client):
+    def search(name):
+        response = client.post('/blog/search', {'search': name})
+        assert response.status_code == 200  # Ensure that the response is successful
+        return response.context['posts']
+
+    return search
+
+
+@pytest.fixture
 def photo_data():
     author = User.objects.latest('pk')
     category = Category.objects.create(name="Ny")

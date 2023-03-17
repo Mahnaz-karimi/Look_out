@@ -2,6 +2,7 @@ from django import urls
 import pytest
 from django.contrib.auth.models import User
 from blog.models import Post, Comment, Photo, Youtube, Images
+from blog.views import search
 
 
 url_data = [
@@ -192,3 +193,12 @@ def test_youtube_delete_view(client, user_data_for_login, create_user_for_login,
     resp = client.post(user_url)
     assert resp.status_code == 302
     assert resp.url == urls.reverse('blog:youtube-videos')
+
+
+@pytest.mark.django_db
+def test_search(request):
+    def search(name):
+        factory = RequestFactory()
+        request = factory.post('blog/search/', {'search': name})
+        search_results = search_fixture(name)
+        assert len(search_results) > 0

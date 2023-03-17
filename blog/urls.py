@@ -20,7 +20,7 @@ from blog.views import (
     PhotoAlbumDetailView,
     AddImage_AlbumView,
     ImageAlbumDeleteView,
-
+    search,
 )
 
 app_name = 'blog'
@@ -48,5 +48,7 @@ urlpatterns = [
     path('youtube/videos', YoutubeListView.as_view(), name='youtube-videos'),
     path('youtube/new/', login_required(YoutubeCreateView.as_view()), name='youtube-new'),
     path('youtube/delete/<int:pk>/', login_required(YoutubeDeleteView.as_view()), name='youtube-delete'),
+
+    path('search/', search, name='search')
 ]
 

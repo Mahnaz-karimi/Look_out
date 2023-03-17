@@ -1,6 +1,16 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <h1 class="mb-3">Alle Post</h1>
+
+
+<h1 class="mb-3">Alle Post</h1>
+
+<form method="post" enctype="multipart/form-data" action="/blog/search/">
+{% csrf_token %}
+   <input type="text" name="search">
+    <input type="submit" value="Search">
+</form>
+
+
       <div >
         {% if request.user.is_authenticated %}
             <div class="card">
@@ -14,7 +24,10 @@
                 </ul>
             </div>
         {% endif %}
+
       </div>
+<!-- SEARCH FIELD -->
+
     {% for post in posts %}
         <post class="media content-section">
             <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> <!-- den vil vise billed af den user -->

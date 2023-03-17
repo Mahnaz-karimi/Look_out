@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # mix in sikre os at user er logget ind
 import config.settings
 from django.shortcuts import redirect
+from django.shortcuts import render
 
 
 # Photos detail
@@ -143,6 +144,22 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['-date_posted']  # med - vil nyeste post vil stå først
     paginate_by = config.settings.PAGINATION_COUNT
+
+
+def search(request):
+    name = request.POST['search']  # search is the name of the input tag
+    posts = Post.objects.all()
+    search_model_list = []
+
+    for obj in posts:
+        if name in obj.title or name in obj.content:
+            mysearch = Post.objects.get(id=obj.id)
+            search_model_list.append(mysearch)
+            print("Found", obj.id)
+        else:
+            print("Did not find")
+
+    return render(request, 'blog/post.html', {'posts': search_model_list})
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
