@@ -3,7 +3,7 @@ import pytest
 from django.contrib.auth.models import User
 from blog.models import Post, Comment, Photo, Youtube, Images
 from blog.views import search
-
+from django.test import RequestFactory
 
 url_data = [
     ('person:login', 200),
@@ -196,9 +196,10 @@ def test_youtube_delete_view(client, user_data_for_login, create_user_for_login,
 
 
 @pytest.mark.django_db
-def test_search(request):
-    def search(name):
-        factory = RequestFactory()
-        request = factory.post('blog/search/', {'search': name})
-        search_results = search_fixture(name)
-        assert len(search_results) > 0
+def test_search(client, user_data_for_login, create_user_for_login, post_data):
+    factory = RequestFactory()
+    request = factory.post('blog:search', data={'search': 'title1'})
+    response = search(request)
+    assert response.status_code == 200
+    assert 'Alle Post' in str(response.content)
+    assert bytes('title1', 'utf-8') in response.content

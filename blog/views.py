@@ -147,12 +147,12 @@ class PostListView(ListView):
 
 
 def search(request):
-    name = request.POST['search']  # search is the name of the input tag
+    search_name = request.POST['search']  # search is the name of the input tag and take a search name
     posts = Post.objects.all()
-    search_model_list = []
+    search_model_list = []  # new list of the Posts
 
     for obj in posts:
-        if name in obj.title or name in obj.content:
+        if search_name in obj.title or search_name in obj.content:
             mysearch = Post.objects.get(id=obj.id)
             search_model_list.append(mysearch)
             print("Found", obj.id)
